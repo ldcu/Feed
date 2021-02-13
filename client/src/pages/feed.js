@@ -189,7 +189,7 @@ class App extends React.Component {
 	handleSubmit(e) {
 		e.preventDefault();
 
-		fetch("http://localhost:3000/api/feed", {
+		fetch("/api/feed", {
 			method: "POST",
 			body: JSON.stringify(this.state),
 			headers: {
