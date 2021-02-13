@@ -1,0 +1,24 @@
+/* Container configuration. ---------------------------------------------------------------------------------------------------- */
+
+.container {
+	max-width: 55rem;
+	padding: 0 1rem;
+	margin: 3rem auto 6rem;
+}
+
+/* Header center image. ---------------------------------------------------------------------------------------------------- */
+
+.header { /* Header image centering, display. */
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.headerHomeImage { /* /css/121212.png */
+	width: 6rem;
+	height: 6rem;
+}
+
+.borderCircle {
+	border-radius: 9999px;
+}
