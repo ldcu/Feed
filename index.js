@@ -13,7 +13,6 @@ require("dotenv").config({ path: '.env.local' });
 require('./models/yt');
 require('./models/feed');
 require('./models/activity');
-require('./models/md5');
 require('./models/quotes');
 require('./models/goals');
 
@@ -28,7 +27,6 @@ app.use(bodyParser.json());
 require('./routes/ytRoutes')(app);
 require('./routes/feedRoutes')(app);
 require('./routes/activityRoutes')(app);
-require('./routes/md5Routes')(app);
 require('./routes/quotesRoutes')(app);
 require('./routes/goalsRoutes')(app);
 

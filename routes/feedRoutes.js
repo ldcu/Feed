@@ -10,7 +10,10 @@ module.exports = (app) => {
 
 	app.get(`/api/feed/count`, async (req, res) => {
 		let feed = await Feed.estimatedDocumentCount();
-		return res.status(200).sendStatus(feed);
+		return res.status(200).send({
+			error: false,
+			feed
+		});
 	});
 
 	app.post(`/api/feed`, async (req, res) => {
