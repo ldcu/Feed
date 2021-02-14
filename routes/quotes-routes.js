@@ -1,8 +1,7 @@
-const mongoose = require('mongoose');
-const Quotes = mongoose.model('quotes');
+const mongoose = require("mongoose");
+const Quotes = mongoose.model("quotes");
 
 module.exports = (app) => {
-
 	app.get(`/api/quotes`, async (req, res) => {
 		let quotes = await Quotes.aggregate([{ $sample: { size: 1 } }]);
 		// let quotes = await Quotes.find();
@@ -13,9 +12,9 @@ module.exports = (app) => {
 		let quotes = await Quotes.create(req.body);
 		return res.status(201).send({
 			error: false,
-			quotes
-		})
-	})
+			quotes,
+		});
+	});
 
 	app.put(`/api/quotes/:id`, async (req, res) => {
 		const { id } = req.params;
@@ -24,9 +23,8 @@ module.exports = (app) => {
 
 		return res.status(202).send({
 			error: false,
-			quotes
-		})
-
+			quotes,
+		});
 	});
 
 	app.delete(`/api/quotes/:id`, async (req, res) => {
@@ -36,9 +34,7 @@ module.exports = (app) => {
 
 		return res.status(202).send({
 			error: false,
-			quotes
-		})
-
-	})
-
-}
+			quotes,
+		});
+	});
+};

@@ -5,11 +5,10 @@ html,
 body {
 	padding: 0;
 	margin: 0;
-	font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto,
-		Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue,
-		sans-serif;
-background: #0f0f0f;
-color: #b7b7b7;
+	font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
+		Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+	background: #0f0f0f;
+	color: #b7b7b7;
 }
 
 .card-body {
@@ -44,16 +43,16 @@ color: #b7b7b7;
 }
 
 .link:hover {
-	 color: #b7b7b7;
-	 text-decoration: none;
+	color: #b7b7b7;
+	text-decoration: none;
 }
 
-.half-rule { 
+.half-rule {
 	border-color: #1c1c1c;
 }
 
 .tab-space {
-	padding-left:1em
+	padding-left: 1em;
 }
 
 /* Pagination configuration. ---------------------------------------------------------------------------------------------------- */
@@ -66,7 +65,7 @@ color: #b7b7b7;
 	text-align: center;
 }
 
-.pagination > .active > a{
+.pagination > .active > a {
 	/* background-color: #121212 ; */
 	/* border-color: #b7b7b7 ;
 	color: #fff; */
@@ -74,7 +73,7 @@ color: #b7b7b7;
 	/* font-family: "Tahoma"; */
 }
 
-.pagination > li > a{
+.pagination > li > a {
 	/* border: 1px solid #b7b7b7 ; */
 	padding: 1px 5px;
 	outline: none;
@@ -83,16 +82,25 @@ color: #b7b7b7;
 	font-size: 14px;
 }
 
-.pagination > .active > a, .pagination > .active > span, .pagination > .active > a:hover, .pagination > .active > span:hover, .pagination > .active > a:focus, .pagination > .active > span:focus{
+.pagination > .active > a,
+.pagination > .active > span,
+.pagination > .active > a:hover,
+.pagination > .active > span:hover,
+.pagination > .active > a:focus,
+.pagination > .active > span:focus {
 	/* background-color: #121212 ; */
 	/* border-color: #b7b7b7; */
-	outline: none ;
+	outline: none;
 }
 
-.pagination > li > a, .pagination > li > span{
-	color: #121212
+.pagination > li > a,
+.pagination > li > span {
+	color: #121212;
 }
 
-.pagination > li:first-child > a, .pagination > li:first-child > span, .pagination > li:last-child > a, .pagination > li:last-child > span{
-	border-radius: unset
+.pagination > li:first-child > a,
+.pagination > li:first-child > span,
+.pagination > li:last-child > a,
+.pagination > li:last-child > span {
+	border-radius: unset;
 }

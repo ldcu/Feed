@@ -5,7 +5,6 @@ import Layout from "../css/layout.module.css";
 import Cookies from "js-cookie";
 
 export default class Home extends React.Component {
-
 	state = {
 		quotes: [],
 		isLoading: true,
@@ -29,7 +28,9 @@ export default class Home extends React.Component {
 	}
 
 	render() {
-		const day = 21, month = "Apr", year = 1996;
+		const day = 21,
+			month = "Apr",
+			year = 1996;
 
 		let age = calculateAge(`${month} ${day} ${year}`);
 		let left = timeLeft(`${month} ${day} ${year}`);
@@ -41,50 +42,48 @@ export default class Home extends React.Component {
 		if (googleId === process.env.REACT_APP_GOOGLE_ID) {
 			HOME = (
 				<div className={Layout.container}>
-				<Helmet>
-					<title>Home</title>
-				</Helmet>
-				<h1>Home</h1>
-				<br />
-				<div className="tab-space">
-					{!isLoading ? (
-						quotes.map((fields) => {
-							const { _id, quote, author, source } = fields; // Getting the fields in a const as it is neater and more informative.
-							return (
-								<div key={_id}>
-									"{quote}"
-									<br />
-									<br />
-									{author} in {source}
-								</div>
-							);
-						})
-					) : (
-						<p>Loading...</p>
-					)}
+					<Helmet>
+						<title>Home</title>
+					</Helmet>
+					<h1>Home</h1>
+					<br />
+					<div className="tab-space">
+						{!isLoading ? (
+							quotes.map((fields) => {
+								const { _id, quote, author, source } = fields; // Getting the fields in a const as it is neater and more informative.
+								return (
+									<div key={_id}>
+										"{quote}"
+										<br />
+										<br />
+										{author} in {source}
+									</div>
+								);
+							})
+						) : (
+							<p>Loading...</p>
+						)}
+					</div>
+					<br />
+					<h1>About you</h1>
+					<br />
+					{/* <li className="tab-space">There are {rows} posts made on <a rel="noopener noreferrer" className="link" href="/feed">Feed</a>.</li> */}
+					<h5>Age</h5>
+					<ul>
+						<li>I'm {age} old.</li>
+						<li>In {left} I'll be one hundred years old.</li>
+					</ul>
 				</div>
-				<br />
-				<h1>About you</h1>
-				<br />
-				{/* <li className="tab-space">There are {rows} posts made on <a rel="noopener noreferrer" className="link" href="/feed">Feed</a>.</li> */}
-				<h5>Age</h5>
-				<ul>
-				<li>I'm {age} old.</li>
-				<li>In {left} I'll be one hundred years old.</li>
-				</ul>
-			</div>
-			)
+			);
 		} else {
 			HOME = (
 				<div align="center">
-				<p>Sorry, mate. This page doesn't exist.</p>
+					<p>Sorry, mate. This page doesn't exist.</p>
 				</div>
-			)
+			);
 		}
 
-		return (
-			<>{HOME}</>
-		);
+		return <>{HOME}</>;
 	}
 }
 

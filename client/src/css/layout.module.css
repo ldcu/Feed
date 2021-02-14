@@ -8,13 +8,15 @@
 
 /* Header center image. ---------------------------------------------------------------------------------------------------- */
 
-.header { /* Header image centering, display. */
+.header {
+	/* Header image centering, display. */
 	display: flex;
 	flex-direction: column;
 	align-items: center;
 }
 
-.headerHomeImage { /* /css/121212.png */
+.headerHomeImage {
+	/* /css/121212.png */
 	width: 6rem;
 	height: 6rem;
 }

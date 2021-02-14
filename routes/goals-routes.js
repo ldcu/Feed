@@ -1,8 +1,7 @@
-const mongoose = require('mongoose');
-const Goals = mongoose.model('goals');
+const mongoose = require("mongoose");
+const Goals = mongoose.model("goals");
 
 module.exports = (app) => {
-
 	app.get(`/api/goals`, async (req, res) => {
 		let goals = await Goals.find().sort({ date: -1 });
 		// let goals = await Goals.find();
@@ -13,9 +12,9 @@ module.exports = (app) => {
 		let goals = await Goals.create(req.body);
 		return res.status(201).send({
 			error: false,
-			goals
-		})
-	})
+			goals,
+		});
+	});
 
 	app.put(`/api/goals/:id`, async (req, res) => {
 		const { id } = req.params;
@@ -24,9 +23,8 @@ module.exports = (app) => {
 
 		return res.status(202).send({
 			error: false,
-			goals
-		})
-
+			goals,
+		});
 	});
 
 	app.delete(`/api/goals/:id`, async (req, res) => {
@@ -36,9 +34,7 @@ module.exports = (app) => {
 
 		return res.status(202).send({
 			error: false,
-			goals
-		})
-
-	})
-
-}
+			goals,
+		});
+	});
+};

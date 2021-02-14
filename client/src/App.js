@@ -1,9 +1,5 @@
 import React, { Component } from "react";
-import {
-	BrowserRouter as Router,
-	Route,
-	Switch,
-} from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Logo from "./css/121212.png";
 import Nav from "react-bootstrap/Nav";
 import Layout from "./css/layout.module.css";
