@@ -5,10 +5,12 @@ import { Helmet } from "react-helmet";
 import md5 from "crypto-js/md5";
 import sha1 from "crypto-js/sha1";
 import Form from "react-bootstrap/Form";
+import Cookies from "js-cookie";
 
 class MD5 extends Component {
 	state = {
 		userInput: "",
+		googleId: Cookies.get("googleId"),
 	};
 
 	inputChangedHandler = (event) => {
@@ -16,8 +18,13 @@ class MD5 extends Component {
 	};
 
 	render() {
-		return (
-			<div className={Layout.container}>
+		
+		let HASH = "";
+		const googleId = this.state.googleId;
+
+		if (googleId === process.env.REACT_APP_GOOGLE_ID) {
+			HASH = (
+				<div className={Layout.container}>
 				<Helmet>
 					<title>Hash</title>
 				</Helmet>
@@ -58,6 +65,17 @@ class MD5 extends Component {
 						← Back to home
 					</a>
 			</div>
+			)
+		} else {
+			HASH = (
+				<div align="center">
+				<p>Sorry, mate. This page doesn't exist.</p>
+				</div>
+			)
+		}
+
+		return (
+		<>{HASH}</>
 		);
 	}
 }

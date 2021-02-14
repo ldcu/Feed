@@ -2,6 +2,7 @@ import React from "react";
 import { Helmet } from 'react-helmet'
 import Layout from '../css/layout.module.css'
 import Axios from "axios"
+import Cookies from "js-cookie";
 
 export default class Home extends React.Component {
 
@@ -9,6 +10,7 @@ export default class Home extends React.Component {
 				goals: [],
 				isLoading: true,
 				errors: null,
+				googleId: Cookies.get("googleId"),
 			};
 		
 			getQuotes() {
@@ -29,15 +31,18 @@ export default class Home extends React.Component {
 		render() {
 
 				const { isLoading, goals } = this.state;
+				let GOALS = "";
+				const googleId = this.state.googleId;
 
-				return (
+				if (googleId === process.env.REACT_APP_GOOGLE_ID) {
+					GOALS = (
 						<div className={Layout.container}>
 								<Helmet>
 										<title>Goals</title>
 								</Helmet>
 								<h1>2021</h1>
 								<br />
-								<p className="tab-space">
+								<div className="tab-space">
 								<ul>
 								{!isLoading ? (
 										goals.map((fields) => {
@@ -52,7 +57,7 @@ export default class Home extends React.Component {
 										<p>Loading...</p>
 								)}
 								</ul>
-								</p>
+								</div>
 								<br /><br />
 								
 								{/* Back to home button. */}
@@ -62,6 +67,17 @@ export default class Home extends React.Component {
 										← Back to home
 										</a>
 						</div>
+					)
+				} else {
+					GOALS = (
+					<div align="center">
+						<p>Sorry, mate. This page doesn't exist.</p>
+					</div>
+					)
+				}
+
+				return (
+					<>{GOALS}</>
 				)
 		}
 }

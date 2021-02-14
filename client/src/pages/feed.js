@@ -7,6 +7,7 @@ import Layout from "../css/layout.module.css";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import ListGroup from "react-bootstrap/ListGroup";
+import Cookies from "js-cookie";
 
 const processString = require("react-process-string"); // Used for processing the string.
 
@@ -15,22 +16,42 @@ let clickableLink = [
 		// 'clickableLink' for identifying links
 		regex: /(http|https):\/\/(\S+)\.([a-z]{2,}?)(.*?)( |,|$|\.|\))/gim, // This is for link starting with 'http' or 'https'.
 		fn: (key, result) => (
-				<span key={key}>
-					<a target="_blank" rel="noopener noreferrer" className="link" href={`${result[1]}://${result[2]}.${result[3]}${result[4]}`}> {result[2]}.{result[3]}{result[4]}</a> {result[5]}
-				</span>
+			<span key={key}>
+				<a
+					target="_blank"
+					rel="noopener noreferrer"
+					className="link"
+					href={`${result[1]}://${result[2]}.${result[3]}${result[4]}`}
+				>
+					{" "}
+					{result[2]}.{result[3]}
+					{result[4]}
+				</a>{" "}
+				{result[5]}
+			</span>
 		),
 	},
 	{
 		regex: /(\S+)\.([a-z]{2,}?)(.*?)( |,|$|\.|\))/gim, // This is for any word that ends in .com or .something, and starts with anything. Meaning it will turn it into a link.
 		fn: (key, result) => (
-				<span key={key}>
-					<a target="_blank" rel="noopener noreferrer" className="link" href={`http://${result[1]}.${result[2]}${result[3]}`}> {result[1]}.{result[2]}{result[3]}</a> {result[4]}
-				</span>
+			<span key={key}>
+				<a
+					target="_blank"
+					rel="noopener noreferrer"
+					className="link"
+					href={`http://${result[1]}.${result[2]}${result[3]}`}
+				>
+					{" "}
+					{result[1]}.{result[2]}
+					{result[3]}
+				</a>{" "}
+				{result[4]}
+			</span>
 		),
 	},
 ];
 
-class App extends React.Component {
+class Feed extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
@@ -38,9 +59,11 @@ class App extends React.Component {
 			data: [],
 			perPage: 10, // 10 items per page to be returned.
 			currentPage: 0,
+			googleId: Cookies.get("googleId"),
 		};
 		this.handlePageClick = this.handlePageClick.bind(this);
 	}
+
 	receivedData() {
 		Axios.get(`/api/feed`).then((res) => {
 			const data = res.data;
@@ -48,7 +71,9 @@ class App extends React.Component {
 				this.state.offset,
 				this.state.offset + this.state.perPage
 			);
-			const postData = slice.map((fields) => ( // Slicing the data so we can have pagination.
+			const postData = slice.map((
+				fields // Slicing the data so we can have pagination.
+			) => (
 				<React.Fragment>
 					<ListGroup>
 						<ListGroup.Item
@@ -98,88 +123,98 @@ class App extends React.Component {
 	}
 
 	render() {
+		let FEED = "";
+		const googleId = this.state.googleId;
 
-		return (
-			<>
-				<div className={Layout.container}>
-					<Helmet>
-						<title>Feed</title>
-					</Helmet>
-					<Container>
-						<h1 style={{ color: "#b7b7b7" }}>Feed</h1>
-						<br />
-
-						<form
-							id="feed-form"
-							onSubmit={this.handleSubmit.bind(this)}
-							method="POST"
-							elevation={0}
-						>
-							<Form.Control
-								as="textarea"
-								rows="10"
-								name="feed"
-								style={{
-									backgroundColor: "#121212",
-									color: "#b7b7b7",
-									boxShadow: "0px 0px 0px white",
-									border: "none",
-								}}
-								elevation={0}
-								value={this.state.content}
-								onChange={this.onMessageChange.bind(this)}
-								className="block"
-								placeholder="What's on your mind?"
-							/>
+		if (googleId === process.env.REACT_APP_GOOGLE_ID) {
+			FEED = (
+				<>
+					<div className={Layout.container}>
+						<Helmet>
+							<title>Feed</title>
+						</Helmet>
+						<Container>
+							<h1 style={{ color: "#b7b7b7" }}>Feed</h1>
 							<br />
 
-							<div align="right">
-								<Button
-									type="submit"
-									size="lg"
+							<form
+								id="feed-form"
+								onSubmit={this.handleSubmit.bind(this)}
+								method="POST"
+								elevation={0}
+							>
+								<Form.Control
+									as="textarea"
+									rows="10"
+									name="feed"
 									style={{
-										border: "none",
-										boxShadow: "0px 0px 0px white",
 										backgroundColor: "#121212",
 										color: "#b7b7b7",
+										boxShadow: "0px 0px 0px white",
+										border: "none",
 									}}
-								>
-									Send
-								</Button>
+									elevation={0}
+									value={this.state.content}
+									onChange={this.onMessageChange.bind(this)}
+									className="block"
+									placeholder="What's on your mind?"
+								/>
+								<br />
+
+								<div align="right">
+									<Button
+										type="submit"
+										size="lg"
+										style={{
+											border: "none",
+											boxShadow: "0px 0px 0px white",
+											backgroundColor: "#121212",
+											color: "#b7b7b7",
+										}}
+									>
+										Send
+									</Button>
+								</div>
+								<br />
+							</form>
+
+							<div>
+								<ReactPaginate
+									previousLabel={"←"}
+									nextLabel={"→"}
+									breakLabel={"..."}
+									breakClassName={"break-me"}
+									pageCount={this.state.pageCount}
+									marginPagesDisplayed={2}
+									pageRangeDisplayed={5}
+									onPageChange={this.handlePageClick}
+									containerClassName={"pagination"}
+									subContainerClassName={"pages pagination"}
+									activeClassName={"active"}
+								/>
+
+								{this.state.postData}
 							</div>
-							<br />
-						</form>
+						</Container>
+					</div>
 
-						<div>
-						
-							<ReactPaginate
-								previousLabel={"←"}
-								nextLabel={"→"}
-								breakLabel={"..."}
-								breakClassName={"break-me"}
-								pageCount={this.state.pageCount}
-								marginPagesDisplayed={2}
-								pageRangeDisplayed={5}
-								onPageChange={this.handlePageClick}
-								containerClassName={"pagination"}
-								subContainerClassName={"pages pagination"}
-								activeClassName={"active"}
-							/>
+					{/* Back to home button. */}
 
-							{this.state.postData}
-
-						</div>
-					</Container>
-				</div>
-				
-				{/* Back to home button. */}
-				
-				<hr className="half-rule" />
+					<hr className="half-rule" />
 					<a href="/home" className="link">
 						← Back to home
 					</a>
-			</>
-		);
+				</>
+			);
+		} else {
+			FEED = (
+				<div align="center">
+					<p>Sorry, mate. This page doesn't exist.</p>
+				</div>
+			);
+		}
+
+		return <>{FEED}</>;
 	}
 
 	onMessageChange(event) {
@@ -225,4 +260,4 @@ function formatDate(string) {
 	return new Date(string).toLocaleDateString("en-GB", options);
 }
 
-export default App;
+export default Feed;

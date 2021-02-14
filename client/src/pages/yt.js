@@ -2,12 +2,14 @@ import React, { Component } from "react";
 import { Helmet } from "react-helmet";
 import Layout from "../css/layout.module.css";
 import Axios from "axios";
+import Cookies from "js-cookie";
 
 class Yt extends Component {
 	state = {
 		links: [],
 		isLoading: true,
 		errors: null,
+		googleId: Cookies.get("googleId"),
 	};
 
 	getQuotes() {
@@ -26,16 +28,20 @@ class Yt extends Component {
 	}
 
 	render() {
-		const { isLoading, links } = this.state;
 
-		return (
-			<div className={Layout.container}>
+		const { isLoading, links } = this.state;
+		let YT = "";
+		const googleId = this.state.googleId;
+
+		if (googleId === process.env.REACT_APP_GOOGLE_ID) {
+			YT = (
+				<div className={Layout.container}>
 				<Helmet>
 					<title>YT</title>
 				</Helmet>
 				<h1>Channels</h1>
 				<br />
-				<p className="tab-space">
+				<div className="tab-space">
 				<ol>
 					{!isLoading ? (
 						links.map((fields) => {
@@ -50,7 +56,7 @@ class Yt extends Component {
 						<p>Loading...</p>
 					)}
 				</ol>
-				</p>
+				</div>
 				<br />
 				<br />
 
@@ -61,6 +67,17 @@ class Yt extends Component {
 					← Back to home
 				</a>
 			</div>
+			)
+		} else {
+			YT = (
+				<div align="center">
+				<p>Sorry, mate. This page doesn't exist.</p>
+				</div>
+			)
+		}
+
+		return (
+			<>{YT}</>
 		);
 	}
 }

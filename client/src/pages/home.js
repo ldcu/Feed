@@ -2,6 +2,7 @@ import Axios from "axios";
 import React from "react";
 import { Helmet } from "react-helmet";
 import Layout from "../css/layout.module.css";
+import Cookies from "js-cookie";
 
 export default class Home extends React.Component {
 
@@ -9,6 +10,7 @@ export default class Home extends React.Component {
 		quotes: [],
 		isLoading: true,
 		errors: null,
+		googleId: Cookies.get("googleId"),
 	};
 
 	getQuotes() {
@@ -33,15 +35,18 @@ export default class Home extends React.Component {
 		let left = timeLeft(`${month} ${day} ${year}`);
 
 		const { isLoading, quotes } = this.state;
+		let HOME = "";
+		const googleId = this.state.googleId;
 
-		return (
-			<div className={Layout.container}>
+		if (googleId === process.env.REACT_APP_GOOGLE_ID) {
+			HOME = (
+				<div className={Layout.container}>
 				<Helmet>
 					<title>Home</title>
 				</Helmet>
 				<h1>Home</h1>
 				<br />
-				<p className="tab-space">
+				<div className="tab-space">
 					{!isLoading ? (
 						quotes.map((fields) => {
 							const { _id, quote, author, source } = fields; // Getting the fields in a const as it is neater and more informative.
@@ -57,7 +62,7 @@ export default class Home extends React.Component {
 					) : (
 						<p>Loading...</p>
 					)}
-				</p>
+				</div>
 				<br />
 				<h1>About you</h1>
 				<br />
@@ -68,6 +73,17 @@ export default class Home extends React.Component {
 				<li>In {left} I'll be one hundred years old.</li>
 				</ul>
 			</div>
+			)
+		} else {
+			HOME = (
+				<div align="center">
+				<p>Sorry, mate. This page doesn't exist.</p>
+				</div>
+			)
+		}
+
+		return (
+			<>{HOME}</>
 		);
 	}
 }

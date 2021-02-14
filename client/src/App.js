@@ -1,31 +1,40 @@
-import React from "react";
-import { BrowserRouter, Route, Redirect } from "react-router-dom";
+import React, { Component } from "react";
+import {
+	BrowserRouter as Router,
+	Route,
+	Switch,
+} from "react-router-dom";
+import Logo from "./css/121212.png";
+import Nav from "react-bootstrap/Nav";
+import Layout from "./css/layout.module.css";
+import { Container } from "react-bootstrap";
+import Cookies from "js-cookie";
+// Menu pages
+import Auth from "./pages/auth";
 import Feed from "./pages/feed";
-import Home from "./pages/home";
 import Goals from "./pages/goals";
-import Logo from './css/121212.png'
-import Nav from 'react-bootstrap/Nav'
-import Yt from "./pages/yt";
 import Hash from "./pages/hash";
-import Layout from './css/layout.module.css'
-import { Container } from 'react-bootstrap'
+import Home from "./pages/home";
+import Yt from "./pages/yt";
+import NotFound from "./pages/not-found";
 
-function App() {
+class App extends Component {
+	constructor(props) {
+		super(props);
 
-	return (
-		<>
-			<div className={Layout.container}>
-				<Container>
+		this.state = {
+			googleId: Cookies.get("googleId"),
+		};
+	}
 
-					<header className={Layout.header}>
-						<img src={Logo} className={`${Layout.headerHomeImage} ${Layout.borderCircle}`} alt="Logo" />
-						<h1><a href="/home" style={{ color: '#121212' }}>g</a></h1>
-					</header>
-					<br />
-					<br />
+	render() {
+		let NAVIGATION_MENU = "";
+		const googleId = this.state.googleId;
 
+		if (googleId === process.env.REACT_APP_GOOGLE_ID) {
+			NAVIGATION_MENU = (
+				<div>
 					<Nav variant="pills" activeKey="1">
-
 						<Nav.Item>
 							<Nav.Link eventKey="2" href="/home" title="Home" className="link">
 								Home
@@ -39,7 +48,12 @@ function App() {
 						</Nav.Item>
 
 						<Nav.Item>
-							<Nav.Link eventKey="4" href="/yt" title="YouTube" className="link">
+							<Nav.Link
+								eventKey="4"
+								href="/yt"
+								title="YouTube"
+								className="link"
+							>
 								YT
 							</Nav.Link>
 						</Nav.Item>
@@ -51,29 +65,59 @@ function App() {
 						</Nav.Item>
 
 						<Nav.Item>
-							<Nav.Link eventKey="4" href="/goals" title="Goals" className="link">
+							<Nav.Link
+								eventKey="4"
+								href="/goals"
+								title="Goals"
+								className="link"
+							>
 								Goals
 							</Nav.Link>
 						</Nav.Item>
-
 					</Nav>
 					<hr className="half-rule" />
+				</div>
+			);
+		} else {
+			// Not logged in.
+			NAVIGATION_MENU = <div align="center"></div>;
+		}
 
+		return (
+			<div className={Layout.container}>
+				<Container>
+					<header className={Layout.header}>
+						<img
+							src={Logo}
+							className={`${Layout.headerHomeImage} ${Layout.borderCircle}`}
+							alt="Logo"
+						/>
+						<h1>
+							<a href="/" style={{ color: "#121212" }}>
+								g
+							</a>
+						</h1>
+					</header>
+					<br />
 					<br />
 
-					<BrowserRouter>
-						<Route exact path="/"><Redirect to="/home" /></Route>
-						<BrowserRouter><Route path="/yt" component={Yt} exact /></BrowserRouter>
-						<BrowserRouter><Route path="/feed" component={Feed} exact /></BrowserRouter>
-						<BrowserRouter><Route path="/home" component={Home} exact /></BrowserRouter>
-						<BrowserRouter><Route path="/hash" component={Hash} exact /></BrowserRouter>
-						<BrowserRouter><Route path="/goals" component={Goals} exact /></BrowserRouter>
-					</BrowserRouter>
+					{NAVIGATION_MENU}
 
+					<Router>
+						<Switch>
+							<Route exact path="/" component={Auth} />
+							<Route path="/feed" component={Feed} exact />
+							<Route path="/goals" component={Goals} exact />
+							<Route path="/hash" component={Hash} exact />
+							<Route path="/home" component={Home} exact />
+							<Route path="/yt" component={Yt} exact />
+							<Route path="*" component={NotFound} exact />
+						</Switch>
+					</Router>
 				</Container>
 			</div>
-		</>
-	);
+		);
+	}
 }
 
 export default App;

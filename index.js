@@ -6,7 +6,7 @@ const path = require('path');
 
 // Read .env files.
 
-require("dotenv").config({ path: '.env.local' });
+require("dotenv").config();
 
 // Import models.
 
@@ -24,11 +24,11 @@ app.use(bodyParser.json());
 
 // Import routes.
 
-require('./routes/ytRoutes')(app);
-require('./routes/feedRoutes')(app);
-require('./routes/activityRoutes')(app);
-require('./routes/quotesRoutes')(app);
-require('./routes/goalsRoutes')(app);
+require('./routes/yt-routes')(app);
+require('./routes/feed-routes')(app);
+require('./routes/activity-routes')(app);
+require('./routes/quotes-routes')(app);
+require('./routes/goals-routes')(app);
 
 // Choose port & start the server.
 
