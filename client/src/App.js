@@ -30,6 +30,21 @@ class App extends Component {
 		if (googleId === process.env.REACT_APP_GOOGLE_ID) {
 			NAVIGATION_MENU = (
 				<div>
+					<header className={Layout.header}>
+						<img
+							src={Logo}
+							className={`${Layout.headerHomeImage} ${Layout.borderCircle}`}
+							alt="Logo"
+						/>
+						<h1>
+							<a href="/" style={{ color: "#121212" }}>
+								g
+							</a>
+						</h1>
+					</header>
+					<br />
+					<br />
+
 					<Nav variant="pills" activeKey="1">
 						<Nav.Item>
 							<Nav.Link eventKey="2" href="/home" title="Home" className="link">
@@ -82,21 +97,6 @@ class App extends Component {
 		return (
 			<div className={Layout.container}>
 				<Container>
-					<header className={Layout.header}>
-						<img
-							src={Logo}
-							className={`${Layout.headerHomeImage} ${Layout.borderCircle}`}
-							alt="Logo"
-						/>
-						<h1>
-							<a href="/" style={{ color: "#121212" }}>
-								g
-							</a>
-						</h1>
-					</header>
-					<br />
-					<br />
-
 					{NAVIGATION_MENU}
 
 					<Router>
