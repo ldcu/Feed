@@ -74,8 +74,8 @@ class Feed extends React.Component {
 			const postData = slice.map((
 				fields // Slicing the data so we can have pagination.
 			) => (
-				<React.Fragment>
-					<ListGroup>
+				<React.Fragment key={fields._id}>
+					<ListGroup >
 						<ListGroup.Item
 							style={{
 								backgroundColor: "#121212",
