@@ -7,7 +7,7 @@ import sha1 from "crypto-js/sha1";
 import Form from "react-bootstrap/Form";
 import Cookies from "js-cookie";
 
-class MD5 extends Component {
+class Hash extends Component {
 	state = {
 		userInput: "",
 		googleId: Cookies.get("googleId"),
@@ -76,4 +76,4 @@ class MD5 extends Component {
 		return <>{HASH}</>;
 	}
 }
-export default MD5;
+export default Hash;

@@ -4,7 +4,7 @@ import Layout from "../css/layout.module.css";
 import Axios from "axios";
 import Cookies from "js-cookie";
 
-export default class Home extends React.Component {
+export default class Goals extends React.Component {
 	state = {
 		goals: [],
 		isLoading: true,

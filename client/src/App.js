@@ -6,7 +6,7 @@ import Layout from "./css/layout.module.css";
 import { Container } from "react-bootstrap";
 import Cookies from "js-cookie";
 // Menu pages
-import Auth from "./pages/auth";
+import Authentication from "./pages/auth";
 import Feed from "./pages/feed";
 import Goals from "./pages/goals";
 import Hash from "./pages/hash";
@@ -101,7 +101,7 @@ class App extends Component {
 
 					<Router>
 						<Switch>
-							<Route exact path="/" component={Auth} />
+							<Route exact path="/" component={Authentication} />
 							<Route path="/feed" component={Feed} exact />
 							<Route path="/goals" component={Goals} exact />
 							<Route path="/hash" component={Hash} exact />
