@@ -5,7 +5,7 @@ import Cookies from "js-cookie";
 const responseGoogle = (response) => {
 	if (response.profileObj.googleId === process.env.REACT_APP_GOOGLE_ID) {
 		Cookies.set("googleId", response.profileObj.googleId, { expires: 7 });
-		this.props.history.push("/home");
+		console.log(response);
 	}
 };
 
@@ -30,6 +30,13 @@ class Authentication extends Component {
 				<>
 					<br />
 					<p>Heya!</p>
+					<GoogleLogin
+						theme="dark"
+						clientId="639369337592-25j6d7dod9nhlkfnsrn3v096b0vpvqol.apps.googleusercontent.com"
+						onSuccess={responseGoogle}
+						onFailure={responseErrorGoogle}
+						cookiePolicy={"single_host_origin"}
+					/>
 				</>
 			);
 		} else {
