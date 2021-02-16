@@ -6,11 +6,14 @@ import { Container } from "react-bootstrap";
 import Layout from "../css/layout.module.css";
 import Logo from "../css/121212.png";
 import { withRouter } from 'react-router'; 
+import { Redirect } from 'react-router-dom';
 
 class Login extends React.Component {
+
 	state = {
 		email: "", // Will be filled with email and password.
 		password: "",
+    toDashboard: false, // This to be used for redirection.
 	};
 
 	handleChange = (e) => {
@@ -20,8 +23,7 @@ class Login extends React.Component {
 	handleSubmit = (e) => {
 		e.preventDefault();
 
-		const data = {
-			// Creating the data to load the POST API.
+		const data = { // Creating the data to load the POST API.
 			email: this.state.email,
 			password: this.state.password,
 		};
@@ -30,30 +32,27 @@ class Login extends React.Component {
 			"Content-Type": "application/json",
 		};
 
-		Axios.post("/api/login", data, {
-			// Sending the credentials entered and obtaining the "access_token".
+		Axios.post("/api/login", data, { // Sending the credentials entered and obtaining the "access_token".
 			headers,
 		})
 			.then(function (response) {
-				// console.log(response);
-				// this.props.history.push("/home");
 				localStorage.setItem("access_token", response.data.access_token); // Get "access_token".
-				localStorage.setItem(
-					"refresh_token",
-					Math.round(new Date().getTime() / 1000 + 3600)
-				); // Unix timestamp with 1 hour ahead of the current time.
+				localStorage.setItem("refresh_token", Math.round(new Date().getTime() / 1000 + 3600)); // Unix timestamp with 1 hour ahead of the current time.
 			})
+			.then(() => this.setState(() => ({
+        toDashboard: true // Setting the "toDashboard" if the API POST is successful.
+      })))
 			.catch(function (error) {
 				console.log('Tough luck. "' + error + '"'); // In case the login doesn't work.
 			});
-
-			// this.props.history.push('/goals');
-			// this.context.history.push('/goals')
-			// const { match, location, history } = this.props
-			// history.push('/goals');
 	};
 
 	render() {
+
+    if (this.state.toDashboard === true) { // Checking if the API POST has been done, and redirecting the user to "/home".
+      return <Redirect to='/' />
+    }
+
 		return (
 			<div className={Layout.container} align="center">
 				<Container>
@@ -74,31 +73,13 @@ class Login extends React.Component {
 					<br />
 					<Form onSubmit={this.handleSubmit.bind(this)}>
 						<Form.Group controlId="formBasicEmail">
-							<Form.Control
-								type="email"
-								placeholder="Email"
-								name="email"
-								onChange={this.handleChange}
-								style={{ backgroundColor: "#121212", color: "#b7b7b7", boxShadow: "0px 0px 0px white", border: "none", width: "50%", }}
-							/>
+							<Form.Control type="email" placeholder="Email" name="email" onChange={this.handleChange} style={{ backgroundColor: "#121212", color: "#b7b7b7", boxShadow: "0px 0px 0px white", border: "none", width: "50%", }} />
 						</Form.Group>
 
 						<Form.Group controlId="formBasicPassword">
-							<Form.Control
-								type="password"
-								placeholder="Password"
-								name="password"
-								onChange={this.handleChange}
-								style={{ backgroundColor: "#121212", color: "#b7b7b7", boxShadow: "0px 0px 0px white", border: "none", width: "50%", }}
-							/>
+							<Form.Control type="password" placeholder="Password" name="password" onChange={this.handleChange} style={{ backgroundColor: "#121212", color: "#b7b7b7", boxShadow: "0px 0px 0px white", border: "none", width: "50%", }} />
 						</Form.Group>
-						<Button
-							variant="primary"
-							type="submit"
-							style={{ border: "none", boxShadow: "0px 0px 0px white", backgroundColor: "#121212", color: "#b7b7b7", }}
-						>
-							Submit
-						</Button>
+						<Button variant="primary" type="submit" style={{ border: "none", boxShadow: "0px 0px 0px white", backgroundColor: "#121212", color: "#b7b7b7", }}>Login</Button>
 					</Form>
 				</Container>
 			</div>

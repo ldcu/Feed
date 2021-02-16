@@ -1,10 +1,5 @@
 import React from 'react';
-import {
-  BrowserRouter,
-  Route,
-  Switch,
-  Redirect
-} from 'react-router-dom'
+import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
 import Feed from "./pages/feed";
 import { Container } from "react-bootstrap";
 import Logo from "./css/121212.png";
@@ -22,16 +17,14 @@ const checkAuth = () => {
   const access_token = localStorage.getItem('access_token'); // Get "access_token".`
   const refresh_token = localStorage.getItem('refresh_token'); // Get expiration date.
 
-  if (!access_token || access_token.length < 212 || !refresh_token) {
+  if (!access_token || access_token.length < 212 || !refresh_token) { // If there's not access_token, refresh_token & if the length of the access_token is less than 212, return false.
     return false;
   }
 
   try {
 
     if (refresh_token < new Date().getTime() / 1000) { // If refresh_token < current date, return false.
-      // console.log("unix time test")
 			return false;
-			// localStorage.clear();
     }
 
   } catch (e) {

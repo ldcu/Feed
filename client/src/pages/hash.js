@@ -10,7 +10,6 @@ import Cookies from "js-cookie";
 class Hash extends Component {
 	state = {
 		userInput: "",
-		googleId: Cookies.get("googleId"),
 	};
 
 	inputChangedHandler = (event) => {
