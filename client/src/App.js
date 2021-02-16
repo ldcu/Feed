@@ -112,6 +112,8 @@ const AuthRoute = ({ component: Component, ...rest }) => (
   )} />
 )
 
+// "AuthRoute" is for the authenticated user. If you're not logged in, you won't have access to those pages.
+
 export default () => (
   <BrowserRouter>
     <Switch>

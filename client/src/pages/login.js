@@ -6,27 +6,6 @@ import { Container } from "react-bootstrap";
 import Layout from "../css/layout.module.css";
 import Logo from "../css/121212.png";
 
-const checkAuth = () => {
-	const access_token = localStorage.getItem('access_token');
-	const refresh_token = localStorage.getItem('refresh_token');
-	if (!access_token || !refresh_token) {
-		return false;
-	}
-
-	try {
-		const { exp } = refresh_token;
-
-		if (exp < new Date().getTime() / 1000) {
-			return false;
-		}
-
-	} catch (e) {
-		return false;
-	}
-
-	return true;
-}
-
 class Login extends React.Component {
 
 	state = {
@@ -53,7 +32,7 @@ class Login extends React.Component {
 		Axios.post("/api/login", data, { // Sending the credentials entered and obtaining the "access_token".
 			headers
 		}).then(function(response) {
-			console.log(response);
+			// console.log(response);
 			// this.props.history.push("/home");
 			localStorage.setItem('access_token', response.data.access_token);
 			localStorage.setItem('refresh_token', Math.round(new Date().getTime()/1000+3600)); // Unix timestamp with 1 hour ahead of the current time.

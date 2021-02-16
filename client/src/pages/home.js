@@ -94,7 +94,7 @@ function calculateAge(birthday) {
 }
 
 function timeLeft() {
-	// Calculate age.
+	// Calculate time left for age.
 
 	let today = new Date("21 Apr 2096"),
 		dob = new Date(), // Birthay already has a value.

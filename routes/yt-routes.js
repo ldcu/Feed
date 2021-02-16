@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 const Yt = mongoose.model("yt");
-const checkAuth = require('../middleware/check-auth');
+const checkAuth = require('../middleware/check-auth'); // checkAuth function is for making the API to work only with an "access_token".
 
 module.exports = (app) => {
 	app.get(`/api/yt`, checkAuth, async (req, res) => {
