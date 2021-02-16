@@ -77,8 +77,6 @@ export default class Home extends React.Component {
 	}
 }
 
-console.log("unix time test", new Date().getTime() / 1000);
-
 function calculateAge(birthday) {
 	// Calculate age.
 
