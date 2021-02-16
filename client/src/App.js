@@ -1,35 +1,50 @@
-import React, { Component } from "react";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import Logo from "./css/121212.png";
-import Nav from "react-bootstrap/Nav";
-import Layout from "./css/layout.module.css";
-import { Container } from "react-bootstrap";
-import Cookies from "js-cookie";
-// Menu pages
-import Authentication from "./pages/auth";
+import React from 'react';
+import {
+  BrowserRouter,
+  Route,
+  Switch,
+  Redirect
+} from 'react-router-dom'
 import Feed from "./pages/feed";
+import { Container } from "react-bootstrap";
+import Logo from "./css/121212.png";
+import Layout from "./css/layout.module.css";
+import Nav from "react-bootstrap/Nav";
 import Goals from "./pages/goals";
 import Hash from "./pages/hash";
 import Home from "./pages/home";
 import Yt from "./pages/yt";
+import Login from './pages/login';
 import NotFound from "./pages/not-found";
 
-class App extends Component {
-	constructor(props) {
-		super(props);
+const checkAuth = () => {
+  const access_token = localStorage.getItem('access_token');
+  const refresh_token = localStorage.getItem('refresh_token');
+  if (!access_token || !refresh_token) {
+    return false;
+  }
 
-		this.state = {
-			googleId: Cookies.get("googleId"),
-		};
-	}
+  try {
+    // { exp: 12903819203 }
+    const { exp } = refresh_token;
 
-	render() {
-		let NAVIGATION_MENU = "";
-		const googleId = this.state.googleId;
+    if (exp < new Date().getTime() / 1000) {
+      return false;
+    }
 
-		if (googleId === process.env.REACT_APP_GOOGLE_ID) {
-			NAVIGATION_MENU = (
-				<div>
+  } catch (e) {
+    return false;
+  }
+
+  return true;
+}
+
+const AuthRoute = ({ component: Component, ...rest }) => (
+  <Route {...rest} render={props => (
+    checkAuth() ? (
+			<div className={Layout.container}>
+			<Container>
+			<div>
 					<header className={Layout.header}>
 						<img
 							src={Logo}
@@ -88,32 +103,27 @@ class App extends Component {
 					</Nav>
 					<hr className="half-rule" />
 				</div>
-			);
-		} else {
-			// Not logged in.
-			NAVIGATION_MENU = <div align="center"></div>;
-		}
-
-		return (
-			<div className={Layout.container}>
-				<Container>
-					{NAVIGATION_MENU}
-
-					<Router>
-						<Switch>
-							<Route exact path="/" component={Authentication} />
-							<Route path="/feed" component={Feed} exact />
-							<Route path="/goals" component={Goals} exact />
-							<Route path="/hash" component={Hash} exact />
-							<Route path="/home" component={Home} exact />
-							<Route path="/yt" component={Yt} exact />
-							<Route path="*" component={NotFound} exact />
-						</Switch>
-					</Router>
-				</Container>
+      <Component {...props} />
+			</Container>
 			</div>
-		);
-	}
-}
+    ) : (
+        <Redirect to={{ pathname: '/login' }} />
+      )
+  )} />
+)
 
-export default App;
+export default () => (
+  <BrowserRouter>
+    <Switch>
+      <Route exact path="/login" render={props => <Login {...props} />} />
+      {/* <Route exact path="*" render={props => <Login {...props} />} /> */}
+      <AuthRoute exact path="/feed" component={Feed} />
+      <AuthRoute exact path="/goals" component={Goals} />
+      <AuthRoute exact path="/hash" component={Hash} />
+      <AuthRoute exact path="/home" component={Home} />
+      <AuthRoute exact path="/yt" component={Yt} />
+      <AuthRoute exact path="/" component={Home} />
+      <AuthRoute exact path="*" component={NotFound} />
+    </Switch>
+  </BrowserRouter>
+);

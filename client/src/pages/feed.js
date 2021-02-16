@@ -51,6 +51,10 @@ let clickableLink = [
 	},
 ];
 
+const headers = {
+	headers: { Authorization: `Bearer ${localStorage.getItem("access_token")}` }
+}
+
 class Feed extends React.Component {
 	constructor(props) {
 		super(props);
@@ -65,7 +69,7 @@ class Feed extends React.Component {
 	}
 
 	receivedData() {
-		Axios.get(`/api/feed`).then((res) => {
+		Axios.get(`/api/feed`, headers).then((res) => {
 			const data = res.data;
 			const slice = data.slice(
 				this.state.offset,
@@ -100,7 +104,7 @@ class Feed extends React.Component {
 
 				postData,
 			});
-		});
+		}).catch(console.log);
 	}
 
 	handlePageClick = (e) => {
@@ -123,98 +127,86 @@ class Feed extends React.Component {
 	}
 
 	render() {
-		let FEED = "";
-		const googleId = this.state.googleId;
 
-		if (googleId === process.env.REACT_APP_GOOGLE_ID) {
-			FEED = (
-				<>
-					<div className={Layout.container}>
-						<Helmet>
-							<title>Feed</title>
-						</Helmet>
-						<Container>
-							<h1 style={{ color: "#b7b7b7" }}>Feed</h1>
-							<br />
+		return (
+			<>
+			<div className={Layout.container}>
+				<Helmet>
+					<title>Feed</title>
+				</Helmet>
+				<Container>
+					<h1 style={{ color: "#b7b7b7" }}>Feed</h1>
+					<br />
 
-							<form
-								id="feed-form"
-								onSubmit={this.handleSubmit.bind(this)}
-								method="POST"
-								elevation={0}
+					<form
+						id="feed-form"
+						onSubmit={this.handleSubmit.bind(this)}
+						method="POST"
+						elevation={0}
+					>
+						<Form.Control
+							as="textarea"
+							rows="10"
+							name="feed"
+							style={{
+								backgroundColor: "#121212",
+								color: "#b7b7b7",
+								boxShadow: "0px 0px 0px white",
+								border: "none",
+							}}
+							elevation={0}
+							value={this.state.content}
+							onChange={this.onMessageChange.bind(this)}
+							className="block"
+							placeholder="What's on your mind?"
+						/>
+						<br />
+
+						<div align="right">
+							<Button
+								type="submit"
+								size="lg"
+								style={{
+									border: "none",
+									boxShadow: "0px 0px 0px white",
+									backgroundColor: "#121212",
+									color: "#b7b7b7",
+								}}
 							>
-								<Form.Control
-									as="textarea"
-									rows="10"
-									name="feed"
-									style={{
-										backgroundColor: "#121212",
-										color: "#b7b7b7",
-										boxShadow: "0px 0px 0px white",
-										border: "none",
-									}}
-									elevation={0}
-									value={this.state.content}
-									onChange={this.onMessageChange.bind(this)}
-									className="block"
-									placeholder="What's on your mind?"
-								/>
-								<br />
+								Send
+							</Button>
+						</div>
+						<br />
+					</form>
 
-								<div align="right">
-									<Button
-										type="submit"
-										size="lg"
-										style={{
-											border: "none",
-											boxShadow: "0px 0px 0px white",
-											backgroundColor: "#121212",
-											color: "#b7b7b7",
-										}}
-									>
-										Send
-									</Button>
-								</div>
-								<br />
-							</form>
+					<div>
+						<ReactPaginate
+							previousLabel={"←"}
+							nextLabel={"→"}
+							breakLabel={"..."}
+							breakClassName={"break-me"}
+							pageCount={this.state.pageCount}
+							marginPagesDisplayed={2}
+							pageRangeDisplayed={5}
+							onPageChange={this.handlePageClick}
+							containerClassName={"pagination"}
+							subContainerClassName={"pages pagination"}
+							activeClassName={"active"}
+						/>
 
-							<div>
-								<ReactPaginate
-									previousLabel={"←"}
-									nextLabel={"→"}
-									breakLabel={"..."}
-									breakClassName={"break-me"}
-									pageCount={this.state.pageCount}
-									marginPagesDisplayed={2}
-									pageRangeDisplayed={5}
-									onPageChange={this.handlePageClick}
-									containerClassName={"pagination"}
-									subContainerClassName={"pages pagination"}
-									activeClassName={"active"}
-								/>
-
-								{this.state.postData}
-							</div>
-						</Container>
+						{this.state.postData}
 					</div>
+				</Container>
+			</div>
 
-					{/* Back to home button. */}
+			{/* Back to home button. */}
 
-					<hr className="half-rule" />
-					<a href="/home" className="link">
-						← Back to home
-					</a>
-				</>
-			);
-		} else {
-			FEED = (
-				<div align="center">
-					<p>Sorry, mate. This page doesn't exist.</p>
-				</div>
-			);
-		}
-
-		return <>{FEED}</>;
+			<hr className="half-rule" />
+			<a href="/home" className="link">
+				← Back to home
+			</a>
+		</>
+		)
 	}
 
 	onMessageChange(event) {
@@ -223,13 +215,16 @@ class Feed extends React.Component {
 
 	handleSubmit(e) {
 		e.preventDefault();
-
-		fetch("/api/feed", {
+		
+		fetch(
+			"/api/feed",
+			{
 			method: "POST",
 			body: JSON.stringify(this.state),
 			headers: {
 				Accept: "application/json",
 				"Content-Type": "application/json",
+				Authorization: `Bearer ${localStorage.getItem("access_token")}`
 			},
 		})
 			.then((response) => response.json())
@@ -242,7 +237,29 @@ class Feed extends React.Component {
 				} else if (response.error) {
 					alert("Message failed to send."); // Pop-up for when it fails to send the message.
 				}
-			});
+			})
+
+		// Axios.post(
+		// 	"/api/feed",
+		// 	this.state.content,
+		// 	headers
+		// ).then((response) => response.json())
+		// .then((response) => {
+		// 	if (!response.error) {
+		// 		// alert("Message Sent."); // Pop-up that let's you know the content was successfully submitted.
+		// 		this.setState({ content: "" });
+		// 		// window.location.reload() // Refresh page.
+		// 		this.componentDidMount(); // Refresh component after sending the content so you'd have the latest record displaying on the page.
+		// 	} else if (response.error) {
+		// 		alert("Message failed to send."); // Pop-up for when it fails to send the message.
+		// 	}
+		// })
+		// .catch(function(error) {
+		// 	console.log("Tough luck. \"" + error + "\"");
+		// })
+			
+			
+			;
 	}
 }
 

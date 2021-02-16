@@ -4,6 +4,10 @@ import { Helmet } from "react-helmet";
 import Layout from "../css/layout.module.css";
 import Cookies from "js-cookie";
 
+const headers = {
+	headers: { Authorization: `Bearer ${localStorage.getItem("access_token")}` }
+}
+
 export default class Home extends React.Component {
 	state = {
 		quotes: [],
@@ -13,7 +17,7 @@ export default class Home extends React.Component {
 	};
 
 	getQuotes() {
-		Axios.get("/api/quotes")
+		Axios.get("/api/quotes", headers)
 			.then((response) => {
 				this.setState({
 					quotes: response.data,
@@ -36,54 +40,42 @@ export default class Home extends React.Component {
 		let left = timeLeft(`${month} ${day} ${year}`);
 
 		const { isLoading, quotes } = this.state;
-		let HOME = "";
-		const googleId = this.state.googleId;
 
-		if (googleId === process.env.REACT_APP_GOOGLE_ID) {
-			HOME = (
-				<div className={Layout.container}>
-					<Helmet>
-						<title>Home</title>
-					</Helmet>
-					<h1>Home</h1>
-					<br />
-					<div className="tab-space">
-						{!isLoading ? (
-							quotes.map((fields) => {
-								const { _id, quote, author, source } = fields; // Getting the fields in a const as it is neater and more informative.
-								return (
-									<div key={_id}>
-										"{quote}"
-										<br />
-										<br />
-										{author} in {source}
-									</div>
-								);
-							})
-						) : (
-							<p>Loading...</p>
-						)}
-					</div>
-					<br />
-					<h1>About you</h1>
-					<br />
-					{/* <li className="tab-space">There are {rows} posts made on <a rel="noopener noreferrer" className="link" href="/feed">Feed</a>.</li> */}
-					<h5>Age</h5>
-					<ul>
-						<li>I'm {age} old.</li>
-						<li>In {left} I'll be one hundred years old.</li>
-					</ul>
-				</div>
-			);
-		} else {
-			HOME = (
-				<div align="center">
-					<p>Sorry, mate. This page doesn't exist.</p>
-				</div>
-			);
-		}
-
-		return <>{HOME}</>;
+		return (
+			<div className={Layout.container}>
+			<Helmet>
+				<title>Home</title>
+			</Helmet>
+			<h1>Home</h1>
+			<br />
+			<div className="tab-space">
+				{!isLoading ? (
+					quotes.map((fields) => {
+						const { _id, quote, author, source } = fields; // Getting the fields in a const as it is neater and more informative.
+						return (
+							<div key={_id}>
+								"{quote}"
+								<br />
+								<br />
+								{author} in {source}
+							</div>
+						);
+					})
+				) : (
+					<p>Loading...</p>
+				)}
+			</div>
+			<br />
+			<h1>About you</h1>
+			<br />
+			{/* <li className="tab-space">There are {rows} posts made on <a rel="noopener noreferrer" className="link" href="/feed">Feed</a>.</li> */}
+			<h5>Age</h5>
+			<ul>
+				<li>I'm {age} old.</li>
+				<li>In {left} I'll be one hundred years old.</li>
+			</ul>
+		</div>
+		)
 	}
 }
 

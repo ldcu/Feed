@@ -1,13 +1,14 @@
 const mongoose = require("mongoose");
 const Feed = mongoose.model("feed");
+const checkAuth = require('../middleware/check-auth');
 
 module.exports = (app) => {
-	app.get(`/api/feed`, async (req, res) => {
+	app.get(`/api/feed`, checkAuth, async (req, res) => {
 		let feed = await Feed.find().sort({ date: -1 });
 		return res.status(200).send(feed);
 	});
 
-	app.get(`/api/feed/count`, async (req, res) => {
+	app.get(`/api/feed/count`, checkAuth, async (req, res) => {
 		let feed = await Feed.estimatedDocumentCount();
 		return res.status(200).send({
 			error: false,
@@ -15,7 +16,7 @@ module.exports = (app) => {
 		});
 	});
 
-	app.post(`/api/feed`, async (req, res) => {
+	app.post(`/api/feed`, checkAuth, async (req, res) => {
 		let feed = await Feed.create(req.body);
 		return res.status(201).send({
 			error: false,
@@ -23,7 +24,7 @@ module.exports = (app) => {
 		});
 	});
 
-	app.put(`/api/feed/:id`, async (req, res) => {
+	app.put(`/api/feed/:id`, checkAuth, async (req, res) => {
 		const { id } = req.params;
 
 		let feed = await Feed.findByIdAndUpdate(id, req.body);
@@ -34,7 +35,7 @@ module.exports = (app) => {
 		});
 	});
 
-	app.delete(`/api/feed/:id`, async (req, res) => {
+	app.delete(`/api/feed/:id`, checkAuth, async (req, res) => {
 		const { id } = req.params;
 
 		let feed = await Feed.findByIdAndDelete(id);
