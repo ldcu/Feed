@@ -14,19 +14,15 @@ export default class Home extends React.Component {
 		errors: null,
 	};
 
-	getQuotes() {
-		Axios.get("/api/quotes", headers)
-			.then((response) => {
-				this.setState({
-					quotes: response.data,
-					isLoading: false,
-				});
-			})
-			.catch((error) => this.setState({ error, isLoading: false }));
-	}
-
 	componentDidMount() {
-		this.getQuotes();
+		Axios.get("/api/quotes", headers)
+		.then((response) => {
+			this.setState({
+				quotes: response.data,
+				isLoading: false,
+			});
+		})
+		.catch((error) => this.setState({ error, isLoading: false }));
 	}
 
 	render() {
