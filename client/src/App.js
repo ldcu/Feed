@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
+import { BrowserRouter, Route, Switch, Redirect, Link } from 'react-router-dom';
 import Feed from "./pages/feed";
 import { Container } from "react-bootstrap";
 import Logo from "./css/121212.png";
@@ -52,11 +52,11 @@ const AuthRoute = ({ component: Component, ...rest }) => (
 					<br />
 
 					<div align="right">
-					<a href="/">
+					<Link to="/">
 					<Button variant="primary" type="submit" style={{ border: "none", boxShadow: "0px 0px 0px white", backgroundColor: "#121212", color: "#b7b7b7", }}
 					onClick={handleSubmit}
 					>Logout</Button>
-					</a>
+					</Link>
 					</div>
 
 
