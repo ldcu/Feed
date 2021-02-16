@@ -20,7 +20,7 @@ import NotFound from "./pages/not-found";
 const checkAuth = () => {
   const access_token = localStorage.getItem('access_token');
   const refresh_token = localStorage.getItem('refresh_token');
-  if (!access_token || !refresh_token) {
+  if (!access_token || access_token.length < 212 || !refresh_token) {
     return false;
   }
 
