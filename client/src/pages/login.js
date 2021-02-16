@@ -5,7 +5,6 @@ import Axios from "axios";
 import { Container } from "react-bootstrap";
 import Layout from "../css/layout.module.css";
 import Logo from "../css/121212.png";
-import { withRouter } from 'react-router'; 
 import { Redirect } from 'react-router-dom';
 
 class Login extends React.Component {
@@ -87,4 +86,4 @@ class Login extends React.Component {
 	}
 }
 
-export default withRouter(Login);
+export default Login;

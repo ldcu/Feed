@@ -55,7 +55,7 @@ const AuthRoute = ({ component: Component, ...rest }) => (
 					<Link to="/">
 					<Button variant="primary" type="submit" style={{ border: "none", boxShadow: "0px 0px 0px white", backgroundColor: "#121212", color: "#b7b7b7", }}
 					onClick={handleSubmit}
-					>Logout</Button>
+					>Leave</Button>
 					</Link>
 					</div>
 
