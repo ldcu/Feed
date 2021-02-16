@@ -16,49 +16,56 @@ import Home from "./pages/home";
 import Yt from "./pages/yt";
 import Login from './pages/login';
 import NotFound from "./pages/not-found";
+import Button from "react-bootstrap/Button";
 
 const checkAuth = () => {
-  const access_token = localStorage.getItem('access_token');
-  const refresh_token = localStorage.getItem('refresh_token');
+  const access_token = localStorage.getItem('access_token'); // Get "access_token".`
+  const refresh_token = localStorage.getItem('refresh_token'); // Get expiration date.
+
   if (!access_token || access_token.length < 212 || !refresh_token) {
     return false;
   }
 
   try {
-    // { exp: 12903819203 }
-    const { exp } = refresh_token;
 
-    if (exp < new Date().getTime() / 1000) {
-      return false;
+    if (refresh_token < new Date().getTime() / 1000) { // If refresh_token < current date, return false.
+      // console.log("unix time test")
+			return false;
+			// localStorage.clear();
     }
 
   } catch (e) {
-    return false;
+    return false; // If any error whatsoever, return false.
   }
 
   return true;
 }
 
+function handleSubmit() {
+	localStorage.clear();
+}
+
 const AuthRoute = ({ component: Component, ...rest }) => (
   <Route {...rest} render={props => (
-    checkAuth() ? (
+    checkAuth() ? ( // If authenticated, then show the navigation menu and everything else.
 			<div className={Layout.container}>
 			<Container>
 			<div>
 					<header className={Layout.header}>
-						<img
-							src={Logo}
-							className={`${Layout.headerHomeImage} ${Layout.borderCircle}`}
-							alt="Logo"
-						/>
-						<h1>
-							<a href="/" style={{ color: "#121212" }}>
-								g
-							</a>
-						</h1>
+						<img src={Logo} className={`${Layout.headerHomeImage} ${Layout.borderCircle}`} alt="Logo"/>
+						<h1><a href="/" style={{ color: "#121212" }}>g</a></h1>
 					</header>
 					<br />
 					<br />
+
+					<div align="right">
+					<a href="/">
+					<Button variant="primary" type="submit" style={{ border: "none", boxShadow: "0px 0px 0px white", backgroundColor: "#121212", color: "#b7b7b7", }}
+					onClick={handleSubmit}
+					>Logout</Button>
+					</a>
+					</div>
+
 
 					<Nav variant="pills" activeKey="1">
 						<Nav.Item>
@@ -74,12 +81,7 @@ const AuthRoute = ({ component: Component, ...rest }) => (
 						</Nav.Item>
 
 						<Nav.Item>
-							<Nav.Link
-								eventKey="4"
-								href="/yt"
-								title="YouTube"
-								className="link"
-							>
+							<Nav.Link eventKey="4" href="/yt" title="YouTube" className="link">
 								YT
 							</Nav.Link>
 						</Nav.Item>
@@ -91,12 +93,7 @@ const AuthRoute = ({ component: Component, ...rest }) => (
 						</Nav.Item>
 
 						<Nav.Item>
-							<Nav.Link
-								eventKey="4"
-								href="/goals"
-								title="Goals"
-								className="link"
-							>
+							<Nav.Link eventKey="4" href="/goals" title="Goals" className="link">
 								Goals
 							</Nav.Link>
 						</Nav.Item>
@@ -106,7 +103,7 @@ const AuthRoute = ({ component: Component, ...rest }) => (
       <Component {...props} />
 			</Container>
 			</div>
-    ) : (
+    ) : ( // If not authenticated, return to "/login" page.
         <Redirect to={{ pathname: '/login' }} />
       )
   )} />

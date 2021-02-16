@@ -2,7 +2,6 @@ import Axios from "axios";
 import React from "react";
 import { Helmet } from "react-helmet";
 import Layout from "../css/layout.module.css";
-import Cookies from "js-cookie";
 
 const headers = {
 	headers: { Authorization: `Bearer ${localStorage.getItem("access_token")}` }
@@ -13,7 +12,6 @@ export default class Home extends React.Component {
 		quotes: [],
 		isLoading: true,
 		errors: null,
-		googleId: Cookies.get("googleId"),
 	};
 
 	getQuotes() {
@@ -78,6 +76,8 @@ export default class Home extends React.Component {
 		)
 	}
 }
+
+console.log("unix time test", new Date().getTime() / 1000);
 
 function calculateAge(birthday) {
 	// Calculate age.
