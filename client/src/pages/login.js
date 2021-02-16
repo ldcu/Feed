@@ -49,7 +49,7 @@ class Login extends React.Component {
 
 	render() {
 
-    if (this.state.toDashboard === true) { // Checking if the API POST has been done, and redirecting the user to "/home".
+    if (this.state.toDashboard === true) { // Checking if the API POST has been done, and redirecting the user to "/".
       return <Redirect to='/' />
     }
 
