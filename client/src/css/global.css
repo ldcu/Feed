@@ -57,50 +57,18 @@ body {
 
 /* Pagination configuration. ---------------------------------------------------------------------------------------------------- */
 
-.pagination {
-	/* margin: 1px auto; */
-	/* display: flex; */
-	/* list-style: none; */
-	/* outline: none; */
-	text-align: center;
+.customPagination > li > a {
+	color: #5f5f5f;
+  background-color: #121212!important;
+	border-color: #1c1c1c;
 }
-
-.pagination > .active > a {
-	/* background-color: #121212 ; */
-	/* border-color: #b7b7b7 ;
-	color: #fff; */
-	font-weight: 900;
-	/* font-family: "Tahoma"; */
+.customPagination {
+  color: #5f5f5f;
+	border-color: #1c1c1c;
 }
-
-.pagination > li > a {
-	/* border: 1px solid #b7b7b7 ; */
-	padding: 1px 5px;
-	outline: none;
-	/* cursor: pointer; */
-	/* font-family: "Tahoma"; */
-	font-size: 14px;
-}
-
-.pagination > .active > a,
-.pagination > .active > span,
-.pagination > .active > a:hover,
-.pagination > .active > span:hover,
-.pagination > .active > a:focus,
-.pagination > .active > span:focus {
-	/* background-color: #121212 ; */
-	/* border-color: #b7b7b7; */
-	outline: none;
-}
-
-.pagination > li > a,
-.pagination > li > span {
-	color: #121212;
-}
-
-.pagination > li:first-child > a,
-.pagination > li:first-child > span,
-.pagination > li:last-child > a,
-.pagination > li:last-child > span {
-	border-radius: unset;
+.customPagination > li.active > a,
+.customPagination > li > a:hover
+{
+	color: #b7b7b7;
+	border-color: #1c1c1c;
 }
