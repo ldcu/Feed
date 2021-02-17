@@ -130,7 +130,7 @@ class Feed extends React.Component {
 		console.log("Rendering Inside GetUsers");
 		const queryParams = {};
 		queryParams["page"] = currentPage; //Page Number
-		queryParams["pagination"] = 8; //Number Of records on Page
+		queryParams["pagination"] = 10; //Number Of records on Page
 		this.dataRequest("/api/feed", "POST", queryParams)
 			.then((data) => {
 				console.log("Data FEtched ", data);
@@ -161,9 +161,9 @@ class Feed extends React.Component {
 
 	render() {
 		let numberOfPages = 0;
-		if (this.state.totalFeed % 8 === 0)
-			numberOfPages = Math.floor(this.state.totalFeed / 8);
-		else numberOfPages = Math.floor(this.state.totalFeed / 8) + 1;
+		if (this.state.totalFeed % 10 === 0)
+			numberOfPages = Math.floor(this.state.totalFeed / 10);
+		else numberOfPages = Math.floor(this.state.totalFeed / 10) + 1;
 
 		return (
 			<>
@@ -195,7 +195,7 @@ class Feed extends React.Component {
 							<br />
 						</form>
 
-						{this.state.totalFeed > 8 && (
+						{this.state.totalFeed > 10 && (
 							<PaginationPage
 								pages={numberOfPages}
 								nextPage={this.nextpage}
