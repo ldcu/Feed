@@ -199,9 +199,7 @@ class Feed extends React.Component {
 											<br />
 											<hr className="half-rule" />
 											<div align="right">
-												<small className="text-muted">
-													{formatDate(fields.date)}
-												</small>
+												<small className="text-muted">{formatDate(fields.date)}</small>
 											</div>
 										</ListGroup.Item>
 									</ListGroup>

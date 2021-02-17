@@ -9,7 +9,7 @@ module.exports = (app) => {
 		var limit = parseInt(req.query.limit) || 3; // If not limit provided in the API call, return 3 only.
 		var query = {};
 		Feed.find(query)
-			.skip(page * limit) //Notice here
+			.skip(page * limit)
 			.limit(limit)
 			.sort({date:-1})
 			.exec((err, doc) => {

@@ -17,7 +17,7 @@ const checkAuth = () => {
   const access_token = localStorage.getItem('access_token'); // Get "access_token".`
   const refresh_token = localStorage.getItem('refresh_token'); // Get expiration date.
 
-  if (!access_token || access_token.length < 212 || !refresh_token) { // If there's not access_token, refresh_token & if the length of the access_token is less than 212, return false.
+  if (!access_token || access_token.length < 200 || !refresh_token) { // If there's not access_token, refresh_token & if the length of the access_token is less than 212, return false.
     return false;
   }
 
