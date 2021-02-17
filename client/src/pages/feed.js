@@ -10,27 +10,27 @@ import { Link } from "react-router-dom";
 
 const processString = require("react-process-string"); // Used for processing the string.
 
+// This is for making the domains (ex.: example.com) clickable. Otherwise you can't click on a link from a text.
 let clickableLink = [
 	{
-		// This is for making the domains (ex.: example.com) clickable. Otherwise you can't click on a link from a text.
 		regex: /(http|https):\/\/(\S+)\.([a-z]{2,}?)(.*?)( |,|$|\.|\))/gim, // This is for link starting with 'http' or 'https'.
 		fn: (key, result) => (
-			<span key={key}><a target="_blank" rel="noopener noreferrer" className="link" href={`${result[1]}://${result[2]}.${result[3]}${result[4]}`}>{" "}{result[2]}.{result[3]}{result[4]}</a>{" "}{result[5]}</span>
+			<span key={key}><a target="_blank" rel="noopener noreferrer" className="link" href={`${result[1]}://${result[2]}.${result[3]}${result[4]}`}>{" "}{result[2]}.{result[3]}{result[4]}</a>{""}{result[5]}</span>
 		),
 	},
 	{
 		regex: /(\S+)\.([a-z]{2,}?)(.*?)( |,|$|\.|\))/gim, // This is for any word that ends in .com or .something, and starts with anything. Meaning it will turn it into a link.
 		fn: (key, result) => (
-			<span key={key}><a target="_blank" rel="noopener noreferrer" className="link" href={`http://${result[1]}.${result[2]}${result[3]}`}>{" "}{result[1]}.{result[2]}{result[3]}</a>{" "}{result[4]}</span>
+			<span key={key}><a target="_blank" rel="noopener noreferrer" className="link" href={`http://${result[1]}.${result[2]}${result[3]}`}>{" "}{result[1]}.{result[2]}{result[3]}</a>{""}{result[4]}</span>
 		),
 	},
 ];
 
+// Building the pagination.
 const PaginationPage = (props) => {
 	const pageLinks = [];
 
 	let start = props.currentPage - (props.currentPage % 10);
-	if (start <= 0) start = 1;
 	for (let i = start; i <= start + 11 && i <= props.pages; i++) {
 		pageLinks.push(
 			<Pagination.Item>
@@ -58,56 +58,52 @@ const PaginationPage = (props) => {
 	);
 };
 
-const headers = {
-	headers: { Authorization: `Bearer ${localStorage.getItem("access_token")}` },
-};
-
 class Feed extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			data: [],
-			currentPage: 1,
-			totalFeed: 0,
+			data: [], // API data. The posts.
+			currentPage: 0, // Current page.
+			totalFeed: 0, // Total posts.
 		};
 	}
 
+	// Next pages to be shown within pagination menu.
 	nextpage = (pageNumber) => {
 		this.setState({
 			currentPage: pageNumber,
 			data: [],
 		});
-		this.getUsers(pageNumber);
+		this.getPosts(pageNumber);
 	};
 
+	// If more than 10 pages, show the 10 buttons in the pagination menu.
 	tenChange = (pageNumber, isposOrneg) => {
 		var finalPage;
 		if (isposOrneg > 0)
-			//+10 clicked
 			finalPage = pageNumber + 10;
-		//-10 clicked
 		else finalPage = pageNumber - 10;
 		this.setState({
 			currentPage: finalPage,
 			data: [],
 		});
-		this.getUsers(finalPage);
+		this.getPosts(finalPage);
 	};
 
+	// If more than 100 pages, show the 100 buttons in the pagination menu.
 	hundreadChange = (pageNumber, isposOrneg) => {
 		var finalPage;
 		if (isposOrneg > 0)
-			//+100 clicked
 			finalPage = pageNumber + 100;
-		//-100 Clicked
 		else finalPage = pageNumber - 100;
 		this.setState({
 			currentPage: finalPage,
 			data: [],
 		});
-		this.getUsers(finalPage);
+		this.getPosts(finalPage);
 	};
 
+	// Function for the API requests, headers and what needs to be included.
 	dataRequest = (URL, methodType, params) => {
 		return fetch(URL, {
 			method: methodType,
@@ -126,42 +122,32 @@ class Feed extends React.Component {
 			});
 	};
 
-	getUsers = (currentPage) => {
-		const queryParams = {};
-		queryParams["page"] = currentPage; //Page Number
-		queryParams["pagination"] = 10; //Number Of records on Page
-		this.dataRequest("/api/feed", "POST", queryParams)
+	// Paginating the results. Getting posts.
+	getPosts = (currentPage) => {
+		this.dataRequest("/api/feed/?page=" + currentPage + "&limit=10", "GET")
 			.then((data) => {
 				this.setState({
 					data: data.posts,
 				});
 			})
 			.catch((err) => {
-				console.log("Error fetching users, mate. ", err);
+				console.log("Error fetching posts, mate. ", err);
 			});
 	};
 
-	getUsersCount = () => {
-		//Passing /1 as Backend Uses same query so if argument then it will return count
-		this.dataRequest("/api/feed/1", "GET").then((data) => {
+	// Get total number of posts.
+	componentDidMount() {
+		this.dataRequest("/api/feed/total/", "GET").then((data) => {
 			this.setState(
 				{
 					totalFeed: data.total,
-				}, //call is for first page records only
-				() => this.getUsers(this.state.currentPage)
+				},
+				() => this.getPosts(this.state.currentPage)
 			);
 		});
-	};
-
-	componentDidMount() {
-		this.getUsersCount();
 	}
 
 	render() {
-		let numberOfPages = 0;
-		if (this.state.totalFeed % 10 === 0)
-			numberOfPages = Math.floor(this.state.totalFeed / 10);
-		else numberOfPages = Math.floor(this.state.totalFeed / 10) + 1;
 
 		return (
 			<>
@@ -195,7 +181,7 @@ class Feed extends React.Component {
 
 						{this.state.totalFeed > 10 && (
 							<PaginationPage
-								pages={numberOfPages}
+								pages={this.state.totalFeed / 10}
 								nextPage={this.nextpage}
 								currentPage={this.state.currentPage}
 								tenChange={this.tenChange}
@@ -226,8 +212,6 @@ class Feed extends React.Component {
 					</Container>
 				</div>
 
-				{/* Back to home button. */}
-
 				<hr className="half-rule" />
 				<a href="/home" className="link">
 					← Back to home
@@ -243,16 +227,7 @@ class Feed extends React.Component {
 	handleSubmit(e) {
 		e.preventDefault();
 
-		fetch("/api/feed/post", {
-			method: "POST",
-			body: JSON.stringify(this.state),
-			headers: {
-				Accept: "application/json",
-				"Content-Type": "application/json",
-				Authorization: `Bearer ${localStorage.getItem("access_token")}`,
-			},
-		})
-			.then((response) => response.json())
+		this.dataRequest("/api/feed/", "POST", this.state) // Sending the content via POST.
 			.then((response) => {
 				if (!response.error) {
 					// alert("Message Sent."); // Pop-up that let's you know the content was successfully submitted.
@@ -268,15 +243,7 @@ class Feed extends React.Component {
 
 function formatDate(string) {
 	// Format date into DD Mon YYYY, HH:MM:SS.
-	var options = {
-		year: "numeric",
-		month: "long",
-		day: "numeric",
-		hour: "numeric",
-		minute: "numeric",
-		second: "numeric",
-		weekday: "long",
-	};
+	var options = { year: "numeric", month: "long", day: "numeric", hour: "numeric", minute: "numeric", second: "numeric", weekday: "long", };
 	return new Date(string).toLocaleDateString("en-GB", options);
 }
 
