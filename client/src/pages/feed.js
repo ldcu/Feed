@@ -137,7 +137,7 @@ class Feed extends React.Component {
 
 	// Get total number of posts.
 	componentDidMount() {
-		this.dataRequest("/api/feed/total/", "GET").then((data) => {
+		this.dataRequest("/api/feed/?page=1", "GET").then((data) => {
 			this.setState(
 				{
 					totalFeed: data.total,

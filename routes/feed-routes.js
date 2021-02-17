@@ -6,7 +6,7 @@ module.exports = (app) => {
 
 	app.get("/api/feed/", checkAuth, (req, res) => {
 		var page = parseInt(req.query.page) || 0;
-		var limit = parseInt(req.query.limit) || 3;
+		var limit = parseInt(req.query.limit) || 3; // If not limit provided in the API call, return 3 only.
 		var query = {};
 		Feed.find(query)
 			.skip(page * limit) //Notice here
@@ -30,20 +30,20 @@ module.exports = (app) => {
 			});
 	});
 
-	app.get("/api/feed/total/", checkAuth, function (req, res) {
-		Feed.find({})
-		.countDocuments()
-		.then((data) => {
-			res.status(200).send({
-			total: data,
-			});
-		})
-		.catch((err) => {
-			res.status(400).send({
-			err: err,
-			});
-		});
-  });
+	// app.get("/api/feed/total/", checkAuth, function (req, res) {
+	// 	Feed.find({})
+	// 	.countDocuments()
+	// 	.then((data) => {
+	// 		res.status(200).send({
+	// 		total: data,
+	// 		});
+	// 	})
+	// 	.catch((err) => {
+	// 		res.status(400).send({
+	// 		err: err,
+	// 		});
+	// 	});
+  // });
 
   app.post(`/api/feed/`, checkAuth, async (req, res) => {
 	let feed = await Feed.create(req.body);
