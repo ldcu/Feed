@@ -127,19 +127,17 @@ class Feed extends React.Component {
 	};
 
 	getUsers = (currentPage) => {
-		console.log("Rendering Inside GetUsers");
 		const queryParams = {};
 		queryParams["page"] = currentPage; //Page Number
 		queryParams["pagination"] = 10; //Number Of records on Page
 		this.dataRequest("/api/feed", "POST", queryParams)
 			.then((data) => {
-				console.log("Data FEtched ", data);
 				this.setState({
 					data: data.users,
 				});
 			})
 			.catch((err) => {
-				console.log("Error In Fetching Users ", err);
+				console.log("Error fetching users, mate. ", err);
 			});
 	};
 
