@@ -8,7 +8,7 @@ module.exports = (app) => {
 	if (req.params.id) {
 	  //Case For Counting Number OF Users
 	  Feed.find({})
-		.count()
+		.countDocuments()
 		.then((data) => {
 		  res.status(200).send({
 			total: data,
