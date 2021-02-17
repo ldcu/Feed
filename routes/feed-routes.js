@@ -35,7 +35,7 @@ module.exports = (app) => {
 	  .sort({ date: -1 })
 	  .then((data) => {
 		res.status(200).send({
-		  users: data,
+		  posts: data,
 		});
 	  })
 	  .catch((err) => {
