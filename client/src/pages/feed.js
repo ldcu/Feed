@@ -133,7 +133,7 @@ class Feed extends React.Component {
 		this.dataRequest("/api/feed", "POST", queryParams)
 			.then((data) => {
 				this.setState({
-					data: data.users,
+					data: data.posts,
 				});
 			})
 			.catch((err) => {
