@@ -2,6 +2,7 @@ const mongoose = require("mongoose");
 const Users = mongoose.model("users");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
+const checkAuth = require("../middleware/check-auth"); // checkAuth function is for making the API to work only with an "access_token".
 
 module.exports = (app) => {
 	app.get(`/api/users`, async (req, res) => {
@@ -9,7 +10,7 @@ module.exports = (app) => {
 		return res.status(200).send(accounts);
 	});
 
-	app.post("/api/signup", (req, res, next) => {
+	app.post("/api/signup", checkAuth, (req, res, next) => {
 		Users.find({ email: req.body.email })
 			.exec()
 			.then((user) => {
