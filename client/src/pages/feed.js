@@ -7,6 +7,7 @@ import Button from "react-bootstrap/Button";
 import ListGroup from "react-bootstrap/ListGroup";
 import { Pagination } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import Alert from "react-bootstrap/Alert";
 
 const processString = require("react-process-string"); // Used for processing the string.
 
@@ -33,8 +34,8 @@ const PaginationPage = (props) => {
 	let start = props.currentPage - (props.currentPage % 10);
 	for (let i = start; i <= start + 11 && i <= props.pages; i++) {
 		pageLinks.push(
-			<Pagination.Item>
-				<Link className="link" onClick={() => props.nextPage(i)}>
+			<Pagination.Item key={i}>
+				<Link className="link" to="#" onClick={() => props.nextPage(i)}>
 					{i}
 				</Link>
 			</Pagination.Item>
@@ -45,13 +46,13 @@ const PaginationPage = (props) => {
 		<Pagination size="sm" className="customPagination">
 			{props.currentPage > 10 && (
 				<Pagination.Item>
-					<Link className="link" onClick={() => props.tenChange(props.currentPage, -1)}>- 10</Link>
+					<Link className="link" to="#" onClick={() => props.tenChange(props.currentPage, -1)}>- 10</Link>
 				</Pagination.Item>
 			)}
 			{pageLinks}
 			{props.currentPage + 10 < props.pages && (
 				<Pagination.Item>
-					<Link className="link" onClick={() => props.tenChange(props.currentPage, 1)}>+ 10</Link>
+					<Link className="link" to="#" onClick={() => props.tenChange(props.currentPage, 1)}>+ 10</Link>
 				</Pagination.Item>
 			)}
 		</Pagination>
@@ -65,6 +66,7 @@ class Feed extends React.Component {
 			data: [], // API data. The posts.
 			currentPage: 0, // Current page.
 			totalFeed: 0, // Total posts.
+			alert: false // Alert to show if text is invalid.
 		};
 	}
 
@@ -80,8 +82,7 @@ class Feed extends React.Component {
 	// If more than 10 pages, show the 10 buttons in the pagination menu.
 	tenChange = (pageNumber, isposOrneg) => {
 		var finalPage;
-		if (isposOrneg > 0)
-			finalPage = pageNumber + 10;
+		if (isposOrneg > 0) finalPage = pageNumber + 10;
 		else finalPage = pageNumber - 10;
 		this.setState({
 			currentPage: finalPage,
@@ -93,8 +94,7 @@ class Feed extends React.Component {
 	// If more than 100 pages, show the 100 buttons in the pagination menu.
 	hundreadChange = (pageNumber, isposOrneg) => {
 		var finalPage;
-		if (isposOrneg > 0)
-			finalPage = pageNumber + 100;
+		if (isposOrneg > 0) finalPage = pageNumber + 100;
 		else finalPage = pageNumber - 100;
 		this.setState({
 			currentPage: finalPage,
@@ -148,7 +148,6 @@ class Feed extends React.Component {
 	}
 
 	render() {
-
 		return (
 			<>
 				<div className={Layout.container}>
@@ -158,13 +157,12 @@ class Feed extends React.Component {
 					<Container>
 						<h1 style={{ color: "#b7b7b7" }}>Feed</h1>
 						<br />
-
 						<form id="feed-form" onSubmit={this.handleSubmit.bind(this)} method="POST" elevation={0}>
 							<Form.Control
 								as="textarea"
 								rows="10"
 								name="feed"
-								style={{ backgroundColor: "#121212", color: "#b7b7b7", boxShadow: "0px 0px 0px white", border: "none",}}
+								style={{ backgroundColor: "#121212", color: "#b7b7b7", boxShadow: "0px 0px 0px white", border: "none", }}
 								elevation={0}
 								value={this.state.content}
 								onChange={this.onMessageChange.bind(this)}
@@ -179,6 +177,15 @@ class Feed extends React.Component {
 							<br />
 						</form>
 
+						{/* Displaying alert if no text is entered. 'onClose' sets the 'alert' to 'false' so the button would close. */}
+						{this.state.alert && (
+							<Alert variant="danger" onClose={() => this.setState({ alert: false })} dismissible>
+								<Alert.Heading>Oh snap! You got an error!</Alert.Heading>
+								<p>Type something.</p>
+							</Alert>
+						)}
+
+						{/* Pagination. */}
 						{this.state.totalFeed > 10 && (
 							<PaginationPage
 								pages={this.state.totalFeed / 10}
@@ -189,17 +196,20 @@ class Feed extends React.Component {
 							></PaginationPage>
 						)}
 
+						{/* Posts. */}
 						{this.state.data.map((fields) => {
 							const { _id, content, date } = fields;
 							return (
 								<React.Fragment key={_id}>
 									<ListGroup>
-										<ListGroup.Item style={{ backgroundColor: "#121212", color: "#b7b7b7", border: "none", }} >
+										<ListGroup.Item style={{ backgroundColor: "#121212", color: "#b7b7b7", border: "none", }}>
 											{processString(clickableLink)(content)}
 											<br />
 											<hr className="half-rule" />
 											<div align="right">
-												<small className="text-muted">{formatDate(fields.date)}</small>
+												<small className="text-muted">
+													{formatDate(fields.date)}
+												</small>
 											</div>
 										</ListGroup.Item>
 									</ListGroup>
@@ -207,6 +217,7 @@ class Feed extends React.Component {
 								</React.Fragment>
 							);
 						})}
+
 					</Container>
 				</div>
 
@@ -218,6 +229,7 @@ class Feed extends React.Component {
 		);
 	}
 
+	// As you type, set the text to the 'content' element.
 	onMessageChange(event) {
 		this.setState({ content: event.target.value });
 	}
@@ -225,17 +237,21 @@ class Feed extends React.Component {
 	handleSubmit(e) {
 		e.preventDefault();
 
-		this.dataRequest("/api/feed/", "POST", this.state) // Sending the content via POST.
-			.then((response) => {
-				if (!response.error) {
-					// alert("Message Sent."); // Pop-up that let's you know the content was successfully submitted.
-					this.setState({ content: "" });
-					// window.location.reload() // Refresh page.
-					this.componentDidMount(); // Refresh component after sending the content so you'd have the latest record displaying on the page.
-				} else if (response.error) {
-					alert("Message failed to send."); // Pop-up for when it fails to send the message.
-				}
-			});
+		if (this.state.content) {
+			// If there is text, send it over.
+			this.dataRequest("/api/feed/", "POST", this.state) // Sending the content via POST.
+				.then((response) => {
+					if (!response.error) {
+						this.setState({ content: "", alert: false }); // Setting alert
+						this.componentDidMount(); // Refresh component after sending the content so you'd have the latest record displaying on the page.
+					} else if (response.error) {
+						alert("Message failed to send."); // Pop-up for when it fails to send the message.
+					}
+				});
+		} else {
+			// If there's no text being sent, set the 'alert' to 'true'.
+			this.setState({ alert: true });
+		}
 	}
 }
 
