@@ -13,7 +13,7 @@ class Login extends React.Component {
 	state = {
 		email: "", // Will be filled with email and password.
 		password: "",
-    toDashboard: false, // This to be used for redirection.
+		toDashboard: false, // This to be used for redirection.
 		alert: false // Alert for wrong credentials.
 	};
 
@@ -41,8 +41,8 @@ class Login extends React.Component {
 				localStorage.setItem("refresh_token", Math.round(new Date().getTime() / 1000 + 3600)); // Unix timestamp with 1 hour ahead of the current time.
 			})
 			.then(() => this.setState(() => ({
-        toDashboard: true // Setting the "toDashboard" if the API POST is successful.
-      })))
+				toDashboard: true // Setting the "toDashboard" if the API POST is successful.
+			})))
 			// .catch(function (error) {
 			// 	console.log('Tough luck. "' + error + '"'); // In case the login doesn't work.
 			// });
@@ -53,9 +53,9 @@ class Login extends React.Component {
 
 	render() {
 
-    if (this.state.toDashboard === true) { // Checking if the API POST has been done, and redirecting the user to "/".
-      return <Redirect to='/' />
-    }
+		if (this.state.toDashboard === true) { // Checking if the API POST has been done, and redirecting the user to "/".
+			return <Redirect to='/' />
+		}
 
 		return (
 			<div className={Layout.container} align="center">
