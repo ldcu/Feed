@@ -4,10 +4,6 @@ import Layout from "../css/layout.module.css";
 import Axios from "axios";
 import Cookies from "js-cookie";
 
-const headers = {
-	headers: { Authorization: `Bearer ${localStorage.getItem("access_token")}` }
-}
-
 class Yt extends Component {
 	state = {
 		links: [],
@@ -16,8 +12,14 @@ class Yt extends Component {
 		googleId: Cookies.get("googleId"),
 	};
 
-	getQuotes() {
-		Axios.get("/api/yt", headers)
+	getYT() {
+		Axios.get("/api/yt", {
+			headers: {
+				Accept: "application/json",
+				"Content-Type": "application/json",
+				Authorization: `Bearer ${localStorage.getItem("access_token")}`,
+			}
+		})
 			.then((response) => {
 				this.setState({
 					links: response.data,
@@ -28,7 +30,7 @@ class Yt extends Component {
 	}
 
 	componentDidMount() {
-		this.getQuotes();
+		this.getYT();
 	}
 
 	render() {

@@ -3,10 +3,6 @@ import React from "react";
 import { Helmet } from "react-helmet";
 import Layout from "../css/layout.module.css";
 
-const headers = {
-	headers: { Authorization: `Bearer ${localStorage.getItem("access_token")}` }
-}
-
 export default class Home extends React.Component {
 	state = {
 		quotes: [],
@@ -15,7 +11,13 @@ export default class Home extends React.Component {
 	};
 
 	componentDidMount() {
-		Axios.get("/api/quotes", headers)
+		Axios.get("/api/quotes", {
+			headers: {
+				Accept: "application/json",
+				"Content-Type": "application/json",
+				Authorization: `Bearer ${localStorage.getItem("access_token")}`,
+			}
+		})
 		.then((response) => {
 			this.setState({
 				quotes: response.data,
