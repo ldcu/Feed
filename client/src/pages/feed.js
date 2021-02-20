@@ -200,7 +200,7 @@ class Feed extends React.Component {
 							return (
 								<React.Fragment key={_id}>
 									<ListGroup>
-										<ListGroup.Item className="post">
+										<ListGroup.Item className="feed">
 											{processString(clickableLink)(content)}
 											<br />
 											<hr className="half-rule" />
