@@ -77,12 +77,12 @@ class Login extends React.Component {
 						</Form.Group>
 						<Button variant="primary" type="submit" style={{ border: "none", boxShadow: "0px 0px 0px white", backgroundColor: "#121212", color: "#b7b7b7", }}>Login</Button>
 					</Form><br/>
-					
+
 						{/* Displaying an alert if wrong credentials. */}
 						{this.state.alert && (
 							<div align="left">
 							<Alert variant="danger" onClose={() => this.setState({ alert: false })} dismissible>
-								<Alert.Heading>Oh snap! You got an error!</Alert.Heading>
+								{/* <Alert.Heading>Oh snap! You got an error!</Alert.Heading> */}
 								<p>Wrong credentials.</p>
 							</Alert>
 							</div>
