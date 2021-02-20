@@ -180,7 +180,7 @@ class Feed extends React.Component {
 						{/* Displaying alert if no text is entered. 'onClose' sets the 'alert' to 'false' so the button would close. */}
 						{this.state.alert && (
 							<Alert variant="danger" onClose={() => this.setState({ alert: false })} dismissible>
-								<Alert.Heading>Oh snap! You got a warning!</Alert.Heading>
+								<Alert.Heading>Oi, mate! You got a warning!</Alert.Heading>
 								<p>Type something.</p>
 							</Alert>
 						)}

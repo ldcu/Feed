@@ -82,7 +82,7 @@ class Login extends React.Component {
 						{this.state.alert && (
 							<div align="left">
 							<Alert variant="danger" onClose={() => this.setState({ alert: false })} dismissible>
-								<Alert.Heading>Oh snap! You got an error!</Alert.Heading>
+								<Alert.Heading>Oi, mate! You got an error!</Alert.Heading>
 								<p>Wrong credentials.</p>
 							</Alert>
 							</div>
