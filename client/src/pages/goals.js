@@ -4,10 +4,6 @@ import Layout from "../css/layout.module.css";
 import Axios from "axios";
 import Cookies from "js-cookie";
 
-const headers = {
-	headers: { Authorization: `Bearer ${localStorage.getItem("access_token")}` }
-}
-
 export default class Goals extends React.Component {
 	state = {
 		goals: [],
@@ -16,8 +12,14 @@ export default class Goals extends React.Component {
 		googleId: Cookies.get("googleId"),
 	};
 
-	getQuotes() {
-		Axios.get("/api/goals", headers)
+	getGoals() {
+		Axios.get("/api/goals", {
+			headers: {
+				Accept: "application/json",
+				"Content-Type": "application/json",
+				Authorization: `Bearer ${localStorage.getItem("access_token")}`,
+			}
+		})
 			.then((response) => {
 				this.setState({
 					goals: response.data,
@@ -28,7 +30,7 @@ export default class Goals extends React.Component {
 	}
 
 	componentDidMount() {
-		this.getQuotes();
+		this.getGoals();
 	}
 
 	render() {
