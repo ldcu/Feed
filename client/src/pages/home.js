@@ -1,7 +1,6 @@
 import Axios from "axios";
 import React from "react";
 import { Helmet } from "react-helmet";
-import Layout from "../css/layout.module.css";
 
 export default class Home extends React.Component {
 	state = {
@@ -38,7 +37,7 @@ export default class Home extends React.Component {
 		const { isLoading, quotes } = this.state;
 
 		return (
-			<div className={Layout.container}>
+			<div className="container">
 			<Helmet>
 				<title>Home</title>
 			</Helmet>

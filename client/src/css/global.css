@@ -17,11 +17,45 @@ body {
 	color: #b7b7b7;
 }
 
+/* Page layout ---------------------------------------------------------------------------------------------------- */
+
+.container {
+	max-width: 55rem;
+	padding: 0 1rem;
+	margin: 3rem auto 6rem;
+}
+
 /* Navigation menu configuration. ---------------------------------------------------------------------------------------------------- */
 
 #nav-dropdown {
 	background-color: #b7b7b7;
 	color: #121212;
+}
+
+/* Logo text ---------------------------------------------------------------------------------------------------- */
+
+.logo-text {
+	color: #121212 !important;
+}
+
+/* Logo image ---------------------------------------------------------------------------------------------------- */
+
+.headerHomeImage {
+	/* /css/121212.png */
+	width: 6rem;
+	height: 6rem;
+}
+
+.borderCircle {
+	border-radius: 9999px;
+}
+
+.header {
+	/* Header image centering, display. */
+	display: flex;
+	flex-direction: column;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 /* Text selection (mouse) color. ---------------------------------------------------------------------------------------------------- */
@@ -71,4 +105,40 @@ body {
 {
 	color: #b7b7b7;
 	border-color: #1c1c1c;
+}
+
+/* Login form ---------------------------------------------------------------------------------------------------- */
+
+.login, .login:focus {
+	background-color: #121212;
+	color: #b7b7b7;
+	box-shadow: none !important;
+	border: none;
+	width: 40%;
+}
+
+/* Textarea ---------------------------------------------------------------------------------------------------- */
+
+.textarea, .textarea:focus {
+	background-color: #121212;
+	color: #b7b7b7;
+	box-shadow:none !important;
+	border: none;
+}
+
+/* Buttons ---------------------------------------------------------------------------------------------------- */
+
+.btn {
+	background-color: #121212 !important;
+	color: #b7b7b7 !important;
+	box-shadow:none !important;
+	border: none;
+}
+
+/* Buttons ---------------------------------------------------------------------------------------------------- */
+
+.post {
+	background-color: #121212;
+	color: #b7b7b7;
+	border: none;
 }

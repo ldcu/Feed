@@ -3,7 +3,6 @@ import { BrowserRouter, Route, Switch, Redirect, Link } from 'react-router-dom';
 import Feed from "./pages/feed";
 import { Container } from "react-bootstrap";
 import Logo from "./css/121212.png";
-import Layout from "./css/layout.module.css";
 import Nav from "react-bootstrap/Nav";
 import Goals from "./pages/goals";
 import Hash from "./pages/hash";
@@ -41,24 +40,19 @@ function handleSubmit() {
 const AuthRoute = ({ component: Component, ...rest }) => (
   <Route {...rest} render={props => (
     checkAuth() ? ( // If authenticated, then show the navigation menu and everything else.
-			<div className={Layout.container}>
+			<div className="container">
 			<Container>
 			<div>
-					<header className={Layout.header}>
-						<img src={Logo} className={`${Layout.headerHomeImage} ${Layout.borderCircle}`} alt="Logo"/>
-						<h1><a href="/" style={{ color: "#121212" }}>g</a></h1>
+					<header className="container">
+						<img src={Logo} className="headerHomeImage borderCircle header" alt="Logo"/>
+						<h1><div align="center"><a href="/" className="logo-text">g</a></div></h1>
 					</header>
-					<br />
-					<br />
 
 					<div align="right">
 					<Link to="/">
-					<Button variant="primary" type="submit" style={{ border: "none", boxShadow: "0px 0px 0px white", backgroundColor: "#121212", color: "#b7b7b7", }}
-					onClick={handleSubmit}
-					>Leave</Button>
+					<Button variant="primary" type="submit" onClick={handleSubmit}>Leave</Button>
 					</Link>
 					</div>
-
 
 					<Nav variant="pills" activeKey="1">
 						<Nav.Item>

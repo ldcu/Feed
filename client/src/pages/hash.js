@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { Container } from "react-bootstrap";
-import Layout from "../css/layout.module.css";
 import { Helmet } from "react-helmet";
 import md5 from "crypto-js/md5";
 import sha1 from "crypto-js/sha1";
@@ -17,12 +16,12 @@ class Hash extends Component {
 
 	render() {
 		return (
-			<div className={Layout.container}>
+			<div className="container">
 			<Helmet>
 				<title>Hash</title>
 			</Helmet>
 			<Container>
-				<h1 style={{ color: "#b7b7b7" }}>Hash</h1>
+				<h1>Hash</h1>
 
 				<br />
 
@@ -31,12 +30,7 @@ class Hash extends Component {
 					rows="5"
 					onChange={this.inputChangedHandler}
 					value={this.state.userInput}
-					style={{
-						backgroundColor: "#121212",
-						color: "#b7b7b7",
-						boxShadow: "0px 0px 0px white",
-						border: "none",
-					}}
+					className="textarea"
 					placeholder="Enter the plain text here."
 				/>
 

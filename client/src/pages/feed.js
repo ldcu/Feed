@@ -1,7 +1,6 @@
 import React from "react";
 import { Container } from "react-bootstrap";
 import { Helmet } from "react-helmet";
-import Layout from "../css/layout.module.css";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import ListGroup from "react-bootstrap/ListGroup";
@@ -150,29 +149,28 @@ class Feed extends React.Component {
 	render() {
 		return (
 			<>
-				<div className={Layout.container}>
+				<div className="container">
 					<Helmet>
 						<title>Feed</title>
 					</Helmet>
 					<Container>
-						<h1 style={{ color: "#b7b7b7" }}>Feed</h1>
+						<h1>Feed</h1>
 						<br />
 						<form id="feed-form" onSubmit={this.handleSubmit.bind(this)} method="POST" elevation={0}>
 							<Form.Control
 								as="textarea"
 								rows="10"
 								name="feed"
-								style={{ backgroundColor: "#121212", color: "#b7b7b7", boxShadow: "0px 0px 0px white", border: "none", }}
 								elevation={0}
 								value={this.state.content}
 								onChange={this.onMessageChange.bind(this)}
-								className="block"
+								className="textarea"
 								placeholder="What's on your mind?"
 							/>
 							<br />
 
 							<div align="right">
-								<Button type="submit" size="lg" style={{ border: "none", boxShadow: "0px 0px 0px white", backgroundColor: "#121212", color: "#b7b7b7", }}>Send</Button>
+								<Button type="submit" size="lg">Send</Button>
 							</div>
 							<br />
 						</form>
@@ -202,7 +200,7 @@ class Feed extends React.Component {
 							return (
 								<React.Fragment key={_id}>
 									<ListGroup>
-										<ListGroup.Item style={{ backgroundColor: "#121212", color: "#b7b7b7", border: "none", }}>
+										<ListGroup.Item className="post">
 											{processString(clickableLink)(content)}
 											<br />
 											<hr className="half-rule" />

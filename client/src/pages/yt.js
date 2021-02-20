@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { Helmet } from "react-helmet";
-import Layout from "../css/layout.module.css";
 import Axios from "axios";
 import Cookies from "js-cookie";
 
@@ -37,7 +36,7 @@ class Yt extends Component {
 		const { isLoading, links } = this.state;
 
 		return (
-			<div className={Layout.container}>
+			<div className="container">
 			<Helmet>
 				<title>YT</title>
 			</Helmet>
