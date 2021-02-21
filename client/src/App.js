@@ -53,7 +53,7 @@ const AuthRoute = ({ component: Component, ...rest }) => (
 
 					<div align="right">
 					<Link to="/">
-					<Button variant="primary" type="submit" onClick={handleSubmit}>Leave</Button>
+					<Button variant="primary" size="m" type="submit" onClick={handleSubmit}>Log out</Button>
 					</Link>
 					</div>
 
