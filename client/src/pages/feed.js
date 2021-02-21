@@ -5,14 +5,13 @@ import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import ListGroup from "react-bootstrap/ListGroup";
 import { Pagination } from "react-bootstrap";
-import { Link } from "react-router-dom";
 import Alert from "react-bootstrap/Alert";
 import Bottom from "./bottom";
 
 const processString = require("react-process-string"); // Used for processing the string.
 
 // This is for making the domains (ex.: example.com) clickable. Otherwise you can't click on a link from a text.
-let clickableLink = [
+let clickable_link = [
 	{
 		regex: /(http|https):\/\/(\S+)\.([a-z]{2,}?)(.*?)( |,|$|\.|\))/gim, // This is for link starting with 'http' or 'https'.
 		fn: (key, result) => (
@@ -28,16 +27,14 @@ let clickableLink = [
 ];
 
 // Building the pagination.
-const PaginationPage = (props) => {
-	const pageLinks = [];
+const BasicPagination = (props) => {
+	const pages = [];
 
 	let start = props.currentPage - (props.currentPage % 10);
-	for (let i = start; i <= start + 11 && i <= props.pages; i++) {
-		pageLinks.push(
-			<Pagination.Item key={i}>
-				<Link className="link" to="#" onClick={() => props.nextPage(i)}>
-					{i+1}
-				</Link>
+	for (let number = start; number <= start + 11 && number <= props.pages; number++) {
+		pages.push(
+			<Pagination.Item key={number} onClick={() => props.nextPage(number)}>
+				{number + 1}
 			</Pagination.Item>
 		);
 	}
@@ -45,15 +42,11 @@ const PaginationPage = (props) => {
 	return (
 		<Pagination size="sm" className="customPagination">
 			{props.currentPage > 10 && (
-				<Pagination.Item>
-					<Link className="link" to="#" onClick={() => props.tenChange(props.currentPage, -1)}>Less pages</Link>
-				</Pagination.Item>
+				<Pagination.Prev onClick={() => props.tenChange(props.currentPage, -1)}>Less pages</Pagination.Prev>
 			)}
-			{pageLinks}
+			{pages}
 			{props.currentPage + 10 < props.pages && (
-				<Pagination.Item>
-					<Link className="link" to="#" onClick={() => props.tenChange(props.currentPage, 1)}>More pages</Link>
-				</Pagination.Item>
+				<Pagination.Next onClick={() => props.tenChange(props.currentPage, 1)}>More pages</Pagination.Next>
 			)}
 		</Pagination>
 	);
@@ -191,7 +184,7 @@ class Feed extends React.Component {
 								<React.Fragment key={_id}>
 									<ListGroup>
 										<ListGroup.Item className="feed">
-											{processString(clickableLink)(content)}
+											{processString(clickable_link)(content)}
 											<br />
 												<small className="text-dark align-bottom">
 													{formatDate(fields.date)}
@@ -205,13 +198,13 @@ class Feed extends React.Component {
 
 						{/* Pagination. */}
 						{this.state.totalFeed > this.state.limit && (
-							<PaginationPage
+							<BasicPagination
 								pages={this.state.totalFeed / this.state.limit}
 								nextPage={this.nextpage}
 								currentPage={this.state.currentPage}
 								tenChange={this.tenChange}
 								hundreadChange={this.hundreadChange}
-							></PaginationPage>
+							></BasicPagination>
 						)}
 
 					</Container>
