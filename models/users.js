@@ -18,5 +18,6 @@ const usersSchema = new Schema(
 	}
 );
 
+mongoose.set('useCreateIndex', true);
 mongoose.pluralize(null);
 mongoose.model("users", usersSchema);
