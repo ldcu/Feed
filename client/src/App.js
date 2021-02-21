@@ -51,12 +51,6 @@ const AuthRoute = ({ component: Component, ...rest }) => (
 						<h1><div align="center"><a href="/" className="logo-text">g</a></div></h1>
 					</header>
 
-					<div align="right">
-					<Link to="/">
-					<Button variant="primary" size="m" type="submit" onClick={handleSubmit}>Log out</Button>
-					</Link>
-					</div>
-
 					<Nav variant="pills" activeKey="1">
 						<Nav.Item>
 							<Nav.Link eventKey="2" href="/home" title="Home" className="link">
@@ -88,7 +82,15 @@ const AuthRoute = ({ component: Component, ...rest }) => (
 							</Nav.Link>
 						</Nav.Item>
 					</Nav>
+
+					{/* Log out button. */}
 					<hr className="half-rule" />
+					<div align="right">
+					<Link to="/">
+					<Button variant="primary" size="m" type="submit" onClick={handleSubmit}>Log out</Button>
+					</Link>
+					</div>
+
 				</div>
       <Component {...props} />
 			</Container>

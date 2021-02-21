@@ -184,10 +184,7 @@ class Feed extends React.Component {
 								<p>Type something.</p>
 							</Alert>
 						)}
-
-						<h1>Posts</h1>
-						<br/>
-
+						
 						{this.state.data.map((fields) => {
 							const { _id, content, date } = fields;
 							return (
