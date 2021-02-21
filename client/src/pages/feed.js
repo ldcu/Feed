@@ -183,6 +183,8 @@ class Feed extends React.Component {
 							</Alert>
 						)}
 
+						<h1>Posts</h1>
+						<br/>
 						{/* Pagination. */}
 						{this.state.totalFeed > 10 && (
 							<PaginationPage

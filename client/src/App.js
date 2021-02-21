@@ -17,16 +17,19 @@ const checkAuth = () => {
   const refresh_token = localStorage.getItem('refresh_token'); // Get expiration date.
 
   if (!access_token || access_token.length < 200 || !refresh_token) { // If there's not access_token, refresh_token & if the length of the access_token is less than 212, return false.
+		localStorage.clear();
     return false;
   }
 
   try {
 
     if (refresh_token < new Date().getTime() / 1000) { // If refresh_token < current date, return false.
+			localStorage.clear();
 			return false;
     }
 
   } catch (e) {
+		localStorage.clear();
     return false; // If any error whatsoever, return false.
   }
 
