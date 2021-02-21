@@ -186,9 +186,9 @@ class Feed extends React.Component {
 						<h1>Posts</h1>
 						<br/>
 						{/* Pagination. */}
-						{this.state.totalFeed > 10 && (
+						{this.state.totalFeed > 20 && (
 							<PaginationPage
-								pages={this.state.totalFeed / 10}
+								pages={this.state.totalFeed / 20}
 								nextPage={this.nextpage}
 								currentPage={this.state.currentPage}
 								tenChange={this.tenChange}
