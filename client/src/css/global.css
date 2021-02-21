@@ -73,11 +73,11 @@ body {
 /* Link color. ---------------------------------------------------------------------------------------------------- */
 
 .link {
-	color: #5f5f5f;
+	color: #5f5f5f !important;
 }
 
 .link:hover {
-	color: #b7b7b7;
+	color: #b7b7b7 !important;
 	text-decoration: none;
 }
 

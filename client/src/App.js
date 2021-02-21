@@ -11,6 +11,7 @@ import Yt from "./pages/yt";
 import Login from './pages/login';
 import NotFound from "./pages/not-found";
 import Button from "react-bootstrap/Button";
+import Navbar from "react-bootstrap/Navbar";
 
 const checkAuth = () => {
   const access_token = localStorage.getItem('access_token'); // Get "access_token".`
@@ -51,7 +52,9 @@ const AuthRoute = ({ component: Component, ...rest }) => (
 						<h1><div align="center"><a href="/" className="logo-text">g</a></div></h1>
 					</header>
 
-					<Nav variant="pills" activeKey="1">
+					<Navbar variant="dark">
+					<Navbar.Collapse>
+					<Nav variant="pills" activeKey="1" className="mr-auto">
 						<Nav.Item>
 							<Nav.Link eventKey="2" href="/home" title="Home" className="link">
 								Home
@@ -83,13 +86,17 @@ const AuthRoute = ({ component: Component, ...rest }) => (
 						</Nav.Item>
 					</Nav>
 
-					{/* Log out button. */}
+					<Nav className="justify-content-end">
+					<Nav.Item>
+							<Nav.Link eventKey="4" href="/" title="Goals" className="link" onClick={handleSubmit}>
+								Log out
+							</Nav.Link>
+						</Nav.Item>
+					</Nav>
+					</Navbar.Collapse>
+					</Navbar>
+				
 					<hr className="half-rule" />
-					<div align="right">
-					<Link to="/">
-					<Button variant="primary" size="m" type="submit" onClick={handleSubmit}>Log out</Button>
-					</Link>
-					</div>
 
 				</div>
       <Component {...props} />
