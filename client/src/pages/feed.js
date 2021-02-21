@@ -205,7 +205,7 @@ class Feed extends React.Component {
 										<ListGroup.Item className="feed">
 											{processString(clickableLink)(content)}
 											<br />
-												<small className="text-dark">
+												<small className="text-dark align-bottom">
 													{formatDate(fields.date)}
 												</small>
 										</ListGroup.Item>
