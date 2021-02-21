@@ -20,7 +20,7 @@ body {
 /* Page layout ---------------------------------------------------------------------------------------------------- */
 
 .container {
-	max-width: 55rem;
+	max-width: 50rem;
 	padding: 0 1rem;
 	margin: 3rem auto 6rem;
 }

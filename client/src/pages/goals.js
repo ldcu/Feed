@@ -1,14 +1,12 @@
 import React from "react";
 import { Helmet } from "react-helmet";
 import Axios from "axios";
-import Cookies from "js-cookie";
 
 export default class Goals extends React.Component {
 	state = {
 		goals: [],
 		isLoading: true,
 		errors: null,
-		googleId: Cookies.get("googleId"),
 	};
 
 	getGoals() {

@@ -1,14 +1,12 @@
 import React, { Component } from "react";
 import { Helmet } from "react-helmet";
 import Axios from "axios";
-import Cookies from "js-cookie";
 
 class Yt extends Component {
 	state = {
 		links: [],
 		isLoading: true,
 		errors: null,
-		googleId: Cookies.get("googleId"),
 	};
 
 	getYT() {

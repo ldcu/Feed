@@ -205,12 +205,9 @@ class Feed extends React.Component {
 										<ListGroup.Item className="feed">
 											{processString(clickableLink)(content)}
 											<br />
-											<hr className="half-rule" />
-											<div align="right">
-												<small className="text-muted">
+												<small className="text-dark">
 													{formatDate(fields.date)}
 												</small>
-											</div>
 										</ListGroup.Item>
 									</ListGroup>
 									<br />
