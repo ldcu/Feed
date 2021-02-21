@@ -59,7 +59,7 @@ class Login extends React.Component {
 		return (
 			<div className="container" align="center">
 				<Container>
-					<header className="header">
+					<header>
 						<img src={Logo} className="headerHomeImage borderCircle header" alt="Logo"/>
 						<h1><a href="/" className="logo-text">g</a></h1>
 					</header>

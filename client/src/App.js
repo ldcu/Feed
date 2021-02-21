@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter, Route, Switch, Redirect, Link } from 'react-router-dom';
+import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
 import Feed from "./pages/feed";
 import { Container } from "react-bootstrap";
 import Logo from "./css/121212.png";
@@ -10,7 +10,6 @@ import Home from "./pages/home";
 import Yt from "./pages/yt";
 import Login from './pages/login';
 import NotFound from "./pages/not-found";
-import Button from "react-bootstrap/Button";
 import Navbar from "react-bootstrap/Navbar";
 
 const checkAuth = () => {
@@ -47,53 +46,25 @@ const AuthRoute = ({ component: Component, ...rest }) => (
 			<div className="container">
 			<Container>
 			<div>
-					<header className="container">
+					<header>
 						<img src={Logo} className="headerHomeImage borderCircle header" alt="Logo"/>
 						<h1><div align="center"><a href="/" className="logo-text">g</a></div></h1>
 					</header>
+					<br />
 
 					<Navbar variant="dark">
-					<Navbar.Collapse>
-					<Nav variant="pills" activeKey="1" className="mr-auto">
-						<Nav.Item>
-							<Nav.Link eventKey="2" href="/home" title="Home" className="link">
-								Home
-							</Nav.Link>
-						</Nav.Item>
-
-						<Nav.Item>
-							<Nav.Link eventKey="3" href="/feed" title="Feed" className="link">
-								Feed
-							</Nav.Link>
-						</Nav.Item>
-
-						<Nav.Item>
-							<Nav.Link eventKey="4" href="/yt" title="YouTube" className="link">
-								YT
-							</Nav.Link>
-						</Nav.Item>
-
-						<Nav.Item>
-							<Nav.Link eventKey="4" href="/hash" title="Hash" className="link">
-								Hash
-							</Nav.Link>
-						</Nav.Item>
-
-						<Nav.Item>
-							<Nav.Link eventKey="4" href="/goals" title="Goals" className="link">
-								Goals
-							</Nav.Link>
-						</Nav.Item>
-					</Nav>
-
-					<Nav className="justify-content-end">
-					<Nav.Item>
-							<Nav.Link eventKey="4" href="/" title="Goals" className="link" onClick={handleSubmit}>
-								Log out
-							</Nav.Link>
-						</Nav.Item>
-					</Nav>
-					</Navbar.Collapse>
+						<Navbar.Collapse>
+							<Nav variant="pills" activeKey="1" className="mr-auto">
+								<Nav.Link eventKey="2" href="/home" title="Home" className="link">Home</Nav.Link>
+								<Nav.Link eventKey="3" href="/feed" title="Feed" className="link">Feed</Nav.Link>
+								<Nav.Link eventKey="4" href="/goals" title="Goals" className="link">Goals</Nav.Link>
+								<Nav.Link eventKey="4" href="/hash" title="Hash" className="link">Hash</Nav.Link>
+								<Nav.Link eventKey="4" href="/yt" title="YouTube" className="link">YouTube</Nav.Link>
+							</Nav>
+							<Nav className="justify-content-end">
+									<Nav.Link eventKey="4" href="/" title="Log out" className="link" onClick={handleSubmit}>Log out</Nav.Link>
+							</Nav>
+						</Navbar.Collapse>
 					</Navbar>
 				
 					<hr className="half-rule" />

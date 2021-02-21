@@ -36,10 +36,9 @@ class Hash extends Component {
 					placeholder="Enter the plain text here."
 				/>
 
-				<br />
-
 				{this.state.userInput.length > 0 && (
 					<div align="center">
+					<br />
 						<b>MD5</b> {md5(this.state.userInput).toString()}
 						<br />
 						<b>SHA1</b> {sha1(this.state.userInput).toString()}
