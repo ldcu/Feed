@@ -123,7 +123,7 @@ class Feed extends React.Component {
 
 	// Paginating the results. Getting posts.
 	getPosts = (currentPage) => {
-		this.dataRequest("/api/feed/?page=" + currentPage + "&limit=10", "GET")
+		this.dataRequest("/api/feed/?page=" + currentPage + "&limit=20", "GET")
 			.then((data) => {
 				this.setState({
 					data: data.posts,
