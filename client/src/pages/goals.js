@@ -1,6 +1,7 @@
 import React from "react";
 import { Helmet } from "react-helmet";
 import Axios from "axios";
+import Bottom from "./bottom"
 
 export default class Goals extends React.Component {
 	state = {
@@ -34,6 +35,7 @@ export default class Goals extends React.Component {
 		const { isLoading, goals } = this.state;
 
 		return (
+			<>
 			<div className="container">
 			<Helmet>
 				<title>Goals</title>
@@ -56,16 +58,11 @@ export default class Goals extends React.Component {
 					)}
 				</ul>
 			</div>
-			<br />
-			<br />
-
-			{/* Back to home button. */}
-
-			<hr className="half-rule" />
-			<a href="/home" className="link">
-				← Back to home
-			</a>
 		</div>
+		
+		{/* Page footer. */}
+		<Bottom />
+		</>
 		)
 	}
 }

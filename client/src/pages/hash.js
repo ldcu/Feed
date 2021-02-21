@@ -4,6 +4,7 @@ import { Helmet } from "react-helmet";
 import md5 from "crypto-js/md5";
 import sha1 from "crypto-js/sha1";
 import Form from "react-bootstrap/Form";
+import Bottom from "./bottom";
 
 class Hash extends Component {
 	state = {
@@ -16,6 +17,7 @@ class Hash extends Component {
 
 	render() {
 		return (
+			<>
 			<div className="container">
 			<Helmet>
 				<title>Hash</title>
@@ -44,14 +46,11 @@ class Hash extends Component {
 					</div>
 				)}
 			</Container>
-
-			{/* Back to home button. */}
-
-			<hr className="half-rule" />
-			<a href="/home" className="link">
-				← Back to home
-			</a>
 		</div>
+		
+		{/* Page footer. */}
+		<Bottom />
+		</>
 		)
 	}
 }

@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Helmet } from "react-helmet";
 import Axios from "axios";
+import Bottom from "./bottom";
 
 class Yt extends Component {
 	state = {
@@ -34,6 +35,7 @@ class Yt extends Component {
 		const { isLoading, links } = this.state;
 
 		return (
+			<>
 			<div className="container">
 			<Helmet>
 				<title>YT</title>
@@ -65,16 +67,10 @@ class Yt extends Component {
 					)}
 				</ol>
 			</div>
-			<br />
-			<br />
-
-			{/* Back to home button. */}
-
-			<hr className="half-rule" />
-			<a href="/home" className="link">
-				← Back to home
-			</a>
 		</div>
+		{/* Page footer. */}
+		<Bottom />
+		</>
 		)
 	}
 }

@@ -7,6 +7,7 @@ import ListGroup from "react-bootstrap/ListGroup";
 import { Pagination } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import Alert from "react-bootstrap/Alert";
+import Bottom from "./bottom";
 
 const processString = require("react-process-string"); // Used for processing the string.
 
@@ -35,7 +36,7 @@ const PaginationPage = (props) => {
 		pageLinks.push(
 			<Pagination.Item key={i}>
 				<Link className="link" to="#" onClick={() => props.nextPage(i)}>
-					{i}
+					{i+1}
 				</Link>
 			</Pagination.Item>
 		);
@@ -45,13 +46,13 @@ const PaginationPage = (props) => {
 		<Pagination size="sm" className="customPagination">
 			{props.currentPage > 10 && (
 				<Pagination.Item>
-					<Link className="link" to="#" onClick={() => props.tenChange(props.currentPage, -1)}>- 10</Link>
+					<Link className="link" to="#" onClick={() => props.tenChange(props.currentPage, -1)}>Less pages</Link>
 				</Pagination.Item>
 			)}
 			{pageLinks}
 			{props.currentPage + 10 < props.pages && (
 				<Pagination.Item>
-					<Link className="link" to="#" onClick={() => props.tenChange(props.currentPage, 1)}>+ 10</Link>
+					<Link className="link" to="#" onClick={() => props.tenChange(props.currentPage, 1)}>More pages</Link>
 				</Pagination.Item>
 			)}
 		</Pagination>
@@ -65,6 +66,7 @@ class Feed extends React.Component {
 			data: [], // API data. The posts.
 			currentPage: 0, // Current page.
 			totalFeed: 0, // Total posts.
+			limit: 20, // Posts per page limit.
 			alert: false // Alert to show if text is invalid.
 		};
 	}
@@ -123,7 +125,7 @@ class Feed extends React.Component {
 
 	// Paginating the results. Getting posts.
 	getPosts = (currentPage) => {
-		this.dataRequest("/api/feed/?page=" + currentPage + "&limit=20", "GET")
+		this.dataRequest("/api/feed/?page=" + currentPage + "&limit=" + this.state.limit, "GET")
 			.then((data) => {
 				this.setState({
 					data: data.posts,
@@ -185,18 +187,7 @@ class Feed extends React.Component {
 
 						<h1>Posts</h1>
 						<br/>
-						{/* Pagination. */}
-						{this.state.totalFeed > 20 && (
-							<PaginationPage
-								pages={this.state.totalFeed / 20}
-								nextPage={this.nextpage}
-								currentPage={this.state.currentPage}
-								tenChange={this.tenChange}
-								hundreadChange={this.hundreadChange}
-							></PaginationPage>
-						)}
 
-						{/* Posts. */}
 						{this.state.data.map((fields) => {
 							const { _id, content, date } = fields;
 							return (
@@ -215,13 +206,22 @@ class Feed extends React.Component {
 							);
 						})}
 
+						{/* Pagination. */}
+						{this.state.totalFeed > this.state.limit && (
+							<PaginationPage
+								pages={this.state.totalFeed / this.state.limit}
+								nextPage={this.nextpage}
+								currentPage={this.state.currentPage}
+								tenChange={this.tenChange}
+								hundreadChange={this.hundreadChange}
+							></PaginationPage>
+						)}
+
 					</Container>
 				</div>
-
-				<hr className="half-rule" />
-				<a href="/home" className="link">
-					← Back to home
-				</a>
+				
+				{/* Page footer. */}
+				<Bottom />
 			</>
 		);
 	}
