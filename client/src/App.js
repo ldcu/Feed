@@ -1,5 +1,5 @@
-import React from 'react';
-import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
+import React from "react";
+import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
 import Feed from "./pages/feed";
 import { Container } from "react-bootstrap";
 import Nav from "react-bootstrap/Nav";
@@ -7,81 +7,85 @@ import Goals from "./pages/goals";
 import Hash from "./pages/hash";
 import Home from "./pages/home";
 import Yt from "./pages/yt";
-import Login from './pages/login';
+import Login from "./pages/login";
 import NotFound from "./sections/not-found";
-import Top from "./sections/top"
+import Top from "./sections/top";
 import Navbar from "react-bootstrap/Navbar";
 
 const checkAuth = () => {
-  const access_token = localStorage.getItem('access_token'); // Get "access_token".`
-  const refresh_token = localStorage.getItem('refresh_token'); // Get expiration date.
+  const access_token = localStorage.getItem("access_token"); // Get "access_token".`
+  const refresh_token = localStorage.getItem("refresh_token"); // Get expiration date.
 
-  if (!access_token || access_token.length < 200 || !refresh_token) { // If there's not access_token, refresh_token & if the length of the access_token is less than 212, return false.
-		localStorage.clear();
+  if (!access_token || access_token.length < 200 || !refresh_token) {
+    // If there's not access_token, refresh_token & if the length of the access_token is less than 212, return false.
+    localStorage.clear();
     return false;
   }
 
   try {
-
-    if (refresh_token < new Date().getTime() / 1000) { // If refresh_token < current date, return false.
-			localStorage.clear();
-			return false;
+    if (refresh_token < new Date().getTime() / 1000) {
+      // If refresh_token < current date, return false.
+      localStorage.clear();
+      return false;
     }
-
   } catch (e) {
-		localStorage.clear();
+    localStorage.clear();
     return false; // If any error whatsoever, return false.
   }
 
   return true;
-}
+};
 
 function handleSubmit() {
-	localStorage.clear();
+  localStorage.clear();
 }
 
 const AuthRoute = ({ component: Component, ...rest }) => (
-  <Route {...rest} render={props => (
-    checkAuth() ? ( // If authenticated, then show the navigation menu and everything else.
-			<div className="container">
-			<Container>
-			<div>
-          <Top />
+  <Route
+    {...rest}
+    render={(props) =>
+      checkAuth() ? ( // If authenticated, then show the navigation menu and everything else.
+        <div className="container">
+          <Container>
+            <div>
 
-					<Navbar variant="dark">
-						<Navbar.Collapse>
-							<Nav variant="pills" activeKey="1" className="mr-auto">
-								<Nav.Link eventKey="2" href="/home" title="Home" className="link">Home</Nav.Link>
-								<Nav.Link eventKey="3" href="/feed" title="Feed" className="link">Feed</Nav.Link>
-								<Nav.Link eventKey="4" href="/goals" title="Goals" className="link">Goals</Nav.Link>
-								<Nav.Link eventKey="4" href="/hash" title="Hash" className="link">Hash</Nav.Link>
-								<Nav.Link eventKey="4" href="/yt" title="YouTube" className="link">YouTube</Nav.Link>
-							</Nav>
-							<Nav className="justify-content-end">
-									<Nav.Link eventKey="4" href="/" title="Log out" className="link" onClick={handleSubmit}>Log out</Nav.Link>
-							</Nav>
-						</Navbar.Collapse>
-					</Navbar>
-				
-					<hr className="half-rule" />
+              <Top />
+              <br />
 
-				</div>
-      <Component {...props} />
-			</Container>
-			</div>
-    ) : ( // If not authenticated, return to "/login" page.
-        <Redirect to={{ pathname: '/login' }} />
+              <Navbar>
+                <Navbar.Collapse>
+                  <Nav className="mr-auto">
+                    <Nav.Link eventKey="2" href="/home" title="Home" className="link">Home</Nav.Link>
+                    <Nav.Link eventKey="3" href="/feed" title="Feed" className="link">Feed</Nav.Link>
+                    <Nav.Link eventKey="4" href="/goals" title="Goals" className="link">Goals</Nav.Link>
+                    <Nav.Link eventKey="4" href="/hash" title="Hash" className="link">Hash</Nav.Link>
+                    <Nav.Link eventKey="4" href="/yt" title="YouTube" className="link">YouTube</Nav.Link>
+                  </Nav>
+                  <Nav className="justify-content-end">
+                    <Nav.Link eventKey="4" href="/" title="Log out" className="link" onClick={handleSubmit}>Log out</Nav.Link>
+                  </Nav>
+                </Navbar.Collapse>
+              </Navbar>
+
+              <hr className="half-rule" />
+            </div>
+            <Component {...props} />
+          </Container>
+        </div>
+      ) : (
+        // If not authenticated, return to "/login" page.
+        <Redirect to={{ pathname: "/login" }} />
       )
-  )} />
-)
+    }
+  />
+);
 
 // "AuthRoute" is for the authenticated user. If you're not logged in, you won't have access to those pages.
 
 export default () => (
   <BrowserRouter>
     <Switch>
-      <Route exact path="/login" render={props => <Login {...props} />} />
-      {/* <Route exact path="*" render={props => <Login {...props} />} /> */}
+      <Route exact path="/login" render={(props) => <Login {...props} />} />
       <AuthRoute exact path="/feed" component={Feed} />
       <AuthRoute exact path="/goals" component={Goals} />
       <AuthRoute exact path="/hash" component={Hash} />

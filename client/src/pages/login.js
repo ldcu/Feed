@@ -60,6 +60,7 @@ class Login extends React.Component {
 			<div className="container" align="center">
 				<Container>
 					<Top />
+          <br />
 					<hr className="half-rule" />
 					<br />
 					<Form onSubmit={this.handleSubmit.bind(this)}>
