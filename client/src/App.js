@@ -62,7 +62,7 @@ const AuthRoute = ({ component: Component, ...rest }) => (
                     <Nav.Link eventKey="4" href="/yt" title="YouTube" className="link">YouTube</Nav.Link>
                   </Nav>
                   <Nav className="justify-content-end">
-                    <Nav.Link eventKey="4" href="/" title="Log out" className="link" onClick={handleSubmit}>Log out</Nav.Link>
+                    <Nav.Link eventKey="4" href="/" title="Log out" className="link" onClick={handleSubmit}>Out</Nav.Link>
                   </Nav>
                 </Navbar.Collapse>
               </Navbar>

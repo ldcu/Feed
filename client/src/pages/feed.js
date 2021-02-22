@@ -165,7 +165,7 @@ class Feed extends React.Component {
 							<br />
 
 							<div align="right">
-								<Button type="submit" size="m">Send post</Button>
+								<Button type="submit" size="m">Send</Button>
 							</div>
 							<br />
 						</form>
