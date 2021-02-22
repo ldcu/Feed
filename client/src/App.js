@@ -2,14 +2,14 @@ import React from 'react';
 import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
 import Feed from "./pages/feed";
 import { Container } from "react-bootstrap";
-import Logo from "./css/121212.png";
 import Nav from "react-bootstrap/Nav";
 import Goals from "./pages/goals";
 import Hash from "./pages/hash";
 import Home from "./pages/home";
 import Yt from "./pages/yt";
 import Login from './pages/login';
-import NotFound from "./pages/not-found";
+import NotFound from "./sections/not-found";
+import Top from "./sections/top"
 import Navbar from "react-bootstrap/Navbar";
 
 const checkAuth = () => {
@@ -46,11 +46,7 @@ const AuthRoute = ({ component: Component, ...rest }) => (
 			<div className="container">
 			<Container>
 			<div>
-					<header>
-						<img src={Logo} className="headerHomeImage borderCircle header" alt="Logo"/>
-						<h1><div align="center"><a href="/" className="logo-text">g</a></div></h1>
-					</header>
-					<br />
+          <Top />
 
 					<Navbar variant="dark">
 						<Navbar.Collapse>

@@ -4,7 +4,7 @@ import { Helmet } from "react-helmet";
 import md5 from "crypto-js/md5";
 import sha1 from "crypto-js/sha1";
 import Form from "react-bootstrap/Form";
-import Bottom from "./bottom";
+import Bottom from "../sections/bottom";
 
 class Hash extends Component {
 	state = {

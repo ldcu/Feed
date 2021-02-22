@@ -6,7 +6,7 @@ import Button from "react-bootstrap/Button";
 import ListGroup from "react-bootstrap/ListGroup";
 import { Pagination } from "react-bootstrap";
 import Alert from "react-bootstrap/Alert";
-import Bottom from "./bottom";
+import Bottom from "../sections/bottom";
 
 const processString = require("react-process-string"); // Used for processing the string.
 

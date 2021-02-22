@@ -3,9 +3,9 @@ import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import Axios from "axios";
 import { Container } from "react-bootstrap";
-import Logo from "../css/121212.png";
 import { Redirect } from 'react-router-dom';
 import Alert from "react-bootstrap/Alert";
+import Top from "../sections/top"
 
 class Login extends React.Component {
 
@@ -59,11 +59,7 @@ class Login extends React.Component {
 		return (
 			<div className="container" align="center">
 				<Container>
-					<header>
-						<img src={Logo} className="headerHomeImage borderCircle header" alt="Logo"/>
-						<h1><a href="/" className="logo-text">g</a></h1>
-					</header>
-					<br />
+					<Top />
 					<hr className="half-rule" />
 					<br />
 					<Form onSubmit={this.handleSubmit.bind(this)}>

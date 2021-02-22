@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Helmet } from "react-helmet";
 import Axios from "axios";
-import Bottom from "./bottom";
+import Bottom from "../sections/bottom";
 
 class Yt extends Component {
 	state = {

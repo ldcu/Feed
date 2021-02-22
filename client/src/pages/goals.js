@@ -1,7 +1,7 @@
 import React from "react";
 import { Helmet } from "react-helmet";
 import Axios from "axios";
-import Bottom from "./bottom"
+import Bottom from "../sections/bottom"
 
 export default class Goals extends React.Component {
 	state = {
