@@ -23,7 +23,7 @@ module.exports = (app) => {
 					return res.json({
 						total: count,
 						page: page,
-						pageSize: doc.length,
+						page_size: doc.length,
 						posts: doc
 					});
 				});
