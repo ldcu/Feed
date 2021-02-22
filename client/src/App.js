@@ -55,14 +55,14 @@ const AuthRoute = ({ component: Component, ...rest }) => (
               <Navbar>
                 <Navbar.Collapse>
                   <Nav className="mr-auto">
-                    <Nav.Link eventKey="2" href="/home" title="Home" className="link">Home</Nav.Link>
-                    <Nav.Link eventKey="3" href="/feed" title="Feed" className="link">Feed</Nav.Link>
-                    <Nav.Link eventKey="4" href="/goals" title="Goals" className="link">Goals</Nav.Link>
-                    <Nav.Link eventKey="4" href="/hash" title="Hash" className="link">Hash</Nav.Link>
-                    <Nav.Link eventKey="4" href="/yt" title="YouTube" className="link">YouTube</Nav.Link>
+                    <Nav.Link eventKey="2" href="/home" title="Home" className="link">home</Nav.Link>
+                    <Nav.Link eventKey="3" href="/feed" title="Feed" className="link">posts</Nav.Link>
+                    <Nav.Link eventKey="4" href="/goals" title="Goals" className="link">goals</Nav.Link>
+                    <Nav.Link eventKey="4" href="/hash" title="Hash" className="link">hash</Nav.Link>
+                    <Nav.Link eventKey="4" href="/yt" title="YouTube" className="link">yt</Nav.Link>
                   </Nav>
                   <Nav className="justify-content-end">
-                    <Nav.Link eventKey="4" href="/" title="Log out" className="link" onClick={handleSubmit}>Out</Nav.Link>
+                    <Nav.Link eventKey="4" href="/" title="Log out" className="link" onClick={handleSubmit}>out</Nav.Link>
                   </Nav>
                 </Navbar.Collapse>
               </Navbar>

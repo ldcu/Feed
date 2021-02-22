@@ -149,7 +149,7 @@ class Feed extends React.Component {
 						<title>Feed</title>
 					</Helmet>
 					<Container>
-						<h1>Feed</h1>
+						<h1>Heya!</h1>
 						<br />
 						<form id="feed-form" onSubmit={this.handleSubmit.bind(this)} method="POST" elevation={0}>
 							<Form.Control
@@ -165,7 +165,7 @@ class Feed extends React.Component {
 							<br />
 
 							<div align="right">
-								<Button type="submit" size="m">Send</Button>
+								<Button type="submit" size="m">Write</Button>
 							</div>
 							<br />
 						</form>
