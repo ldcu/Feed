@@ -7,7 +7,7 @@ import Goals from "./pages/goals";
 import Hash from "./pages/hash";
 import Home from "./pages/home";
 import Yt from "./pages/yt";
-import Login from "./sections/login";
+import Login from "./pages/login";
 import NotFound from "./sections/not-found";
 import Top from "./sections/top";
 import Navbar from "react-bootstrap/Navbar";
