@@ -29,7 +29,7 @@ class Hash extends Component {
 
 				<Form.Control
 					as="textarea"
-					rows="5"
+					rows="3"
 					onChange={this.inputChangedHandler}
 					value={this.state.userInput}
 					className="textarea"
