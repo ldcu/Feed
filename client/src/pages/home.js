@@ -64,11 +64,8 @@ export default class Home extends React.Component {
 			<h1>About you</h1>
 			<br />
 			{/* <li className="tab-space">There are {rows} posts made on <a rel="noopener noreferrer" className="link" href="/feed">Feed</a>.</li> */}
-			<h5>Age</h5>
-			<ul>
-				<li>I'm {age} old.</li>
-				<li>In {left} I'll be one hundred years old.</li>
-			</ul>
+			<div className="tab-space">{age} old.
+			<br/><br/> More {left} and I'll be one hundred years old.</div>
 		</div>
 		)
 	}
