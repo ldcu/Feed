@@ -5,7 +5,6 @@ import Axios from "axios";
 import { Container } from "react-bootstrap";
 import { Redirect } from 'react-router-dom';
 import Alert from "react-bootstrap/Alert";
-import Top from "./top";
 
 class Login extends React.Component {
 

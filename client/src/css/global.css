@@ -11,12 +11,6 @@ body {
 	color: #b7b7b7;
 }
 
-.card-body {
-	background-color: #121212;
-	border-radius: 4656575;
-	color: #b7b7b7;
-}
-
 /* Page layout ---------------------------------------------------------------------------------------------------- */
 
 .container {
@@ -29,33 +23,7 @@ body {
 
 #nav-dropdown {
 	background-color: #b7b7b7;
-	color: #121212;
-}
-
-/* Logo text ---------------------------------------------------------------------------------------------------- */
-
-.logo-text {
-	color: #121212 !important;
-}
-
-/* Logo image ---------------------------------------------------------------------------------------------------- */
-
-.headerHomeImage {
-	/* /css/121212.png */
-	width: 6rem;
-	height: 6rem;
-}
-
-.borderCircle {
-	border-radius: 9999px;
-}
-
-.header {
-	/* Header image centering, display. */
-	display: flex;
-	flex-direction: column;
-  margin-left: auto;
-  margin-right: auto;
+	color: #101010;
 }
 
 /* Text selection (mouse) color. ---------------------------------------------------------------------------------------------------- */
@@ -75,7 +43,7 @@ body {
 /* Link color. ---------------------------------------------------------------------------------------------------- */
 
 .link {
-	color: #2d2d2d !important;
+	color: #2b2b2b !important;
 }
 
 .link:hover {
@@ -91,21 +59,21 @@ body {
 
 .customPagination > li > a {
 	color: #2d2d2d;
-  background-color: #121212 !important;
+  background-color: #101010 !important;
 	box-shadow: none !important;
-	border-color: #121212;
+	border-color: #101010;
 }
 .customPagination > li.active > a,
 .customPagination > li > a:hover
 {
 	color: #b7b7b7;
-	border-color: #121212;
+	border-color: #101010;
 }
 
 /* Login form ---------------------------------------------------------------------------------------------------- */
 
 .login, .login:focus {
-	background-color: #121212;
+	background-color: #101010;
 	color: #b7b7b7;
 	box-shadow: none !important;
 	border: none;
@@ -115,7 +83,7 @@ body {
 /* Textarea ---------------------------------------------------------------------------------------------------- */
 
 .textarea, .textarea:focus {
-	background-color: #121212;
+	background-color: #101010;
 	color: #b7b7b7;
 	box-shadow:none !important;
 	border: none;
@@ -124,7 +92,7 @@ body {
 /* Buttons ---------------------------------------------------------------------------------------------------- */
 
 .btn {
-	background-color: #121212 !important;
+	background-color: #101010 !important;
 	color: #b7b7b7 !important;
 	box-shadow:none !important;
 	border: none;
@@ -133,7 +101,7 @@ body {
 /* Feed posts ---------------------------------------------------------------------------------------------------- */
 
 .feed {
-	background-color: #121212;
+	background-color: #101010;
 	color: #b7b7b7;
 	border: none;
 }
@@ -146,15 +114,13 @@ body {
 
 /* Lines ---------------------------------------------------------------------------------------------------- */
 
-.bottom-line {
-	border-bottom: thin solid #131313 !important;
-}
-
-.top-line {
-	border-top: thin solid #131313 !important;
+.separate-line {
+	border-bottom: thin solid #101010 !important;
+	border-top: thin solid #101010 !important;
 }
 
 .vertical-lines {
-  border-left: thin solid #131313;
-	border-right: thin solid #131313;
+  border-left: thin solid #101010;
+	border-right: thin solid #101010;
+	background-color: #101010;
 }
