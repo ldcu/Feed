@@ -68,9 +68,11 @@ export default class Home extends React.Component {
 			<div className="tab-space">{age} old.
 			<br/><br/> More {left} and I'll be one hundred years old.</div>
 		</div>
+		<div className="vertical-lines">
 			<hr className="bottom-line" />
 				<div align="center">Your session terminates within an hour.</div>
 				<hr className="bottom-line" />
+		</div>
 		</>
 		)
 	}

@@ -3,9 +3,9 @@ import React, { Component } from 'react';
 class Bottom extends Component {
 	render() {
 		return (
-			<div>
-				<hr className="bottom-line" />
-				<a href="/home" className="link">← Back to home</a>
+			<div className="vertical-lines">
+				<hr className="top-line" />
+				<a href="/home" className="link">&#160;&#160;&#160;&#160;← Back to home</a>
 				<hr className="bottom-line" />
 			</div>
 		);

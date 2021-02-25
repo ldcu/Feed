@@ -7,10 +7,10 @@ class Top extends Component {
       <div align="center">
         <header>
         <hr className="top-line" />
-          {/* <a href="/">
+          <a href="/">
             <img src={Logo} className="headerHomeImage borderCircle header" alt="Logo"/>
             <h1 className="logo-text">g</h1>
-          </a> */}
+          </a>
         </header>
       </div>
     );

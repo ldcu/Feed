@@ -147,14 +147,14 @@ body {
 /* Lines ---------------------------------------------------------------------------------------------------- */
 
 .bottom-line {
-	border-bottom: thin solid #121212 !important;
+	border-bottom: thin solid #131313 !important;
 }
 
 .top-line {
-	border-top: thin solid #121212 !important;
+	border-top: thin solid #131313 !important;
 }
 
 .vertical-lines {
-  border-left: thin solid #121212;
-	border-right: thin solid #121212;
+  border-left: thin solid #131313;
+	border-right: thin solid #131313;
 }
