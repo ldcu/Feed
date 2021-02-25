@@ -45,13 +45,12 @@ const AuthRoute = ({ component: Component, ...rest }) => (
     {...rest}
     render={(props) =>
       checkAuth() ? ( // If authenticated, then show the navigation menu and everything else.
-        <div className="container">
+        <div className="container vertical-lines">
           <Container>
             <div>
 
               <Top />
-              <br />
-
+              
               <Navbar>
                 <Navbar.Collapse>
                   <Nav className="mr-auto">
@@ -66,8 +65,7 @@ const AuthRoute = ({ component: Component, ...rest }) => (
                   </Nav>
                 </Navbar.Collapse>
               </Navbar>
-
-              <hr className="half-rule" />
+              <hr className="bottom-line" />
             </div>
             <Component {...props} />
           </Container>

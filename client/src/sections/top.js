@@ -6,10 +6,11 @@ class Top extends Component {
     return (
       <div align="center">
         <header>
-          <a href="/">
+        <hr className="top-line" />
+          {/* <a href="/">
             <img src={Logo} className="headerHomeImage borderCircle header" alt="Logo"/>
             <h1 className="logo-text">g</h1>
-          </a>
+          </a> */}
         </header>
       </div>
     );

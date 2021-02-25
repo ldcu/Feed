@@ -83,10 +83,6 @@ body {
 	text-decoration: none;
 }
 
-.half-rule {
-	border-color: #121212;
-}
-
 .tab-space {
 	padding-left: 1em;
 }
@@ -146,4 +142,19 @@ body {
 
 .darkish {
 	color: "#2d2d2d";
+}
+
+/* Lines ---------------------------------------------------------------------------------------------------- */
+
+.bottom-line {
+	border-bottom: thin solid #121212 !important;
+}
+
+.top-line {
+	border-top: thin solid #121212 !important;
+}
+
+.vertical-lines {
+  border-left: thin solid #121212;
+	border-right: thin solid #121212;
 }

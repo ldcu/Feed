@@ -37,6 +37,7 @@ export default class Home extends React.Component {
 		const { isLoading, quotes } = this.state;
 
 		return (
+			<>
 			<div className="container">
 			<Helmet>
 				<title>Home</title>
@@ -67,6 +68,10 @@ export default class Home extends React.Component {
 			<div className="tab-space">{age} old.
 			<br/><br/> More {left} and I'll be one hundred years old.</div>
 		</div>
+			<hr className="bottom-line" />
+				<div align="center">Your session terminates within an hour.</div>
+				<hr className="bottom-line" />
+		</>
 		)
 	}
 }

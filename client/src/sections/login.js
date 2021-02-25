@@ -59,10 +59,6 @@ class Login extends React.Component {
 		return (
 			<div className="container" align="center">
 				<Container>
-					<Top />
-          <br />
-					<hr className="half-rule" />
-					<br />
 					<Form onSubmit={this.handleSubmit.bind(this)}>
 						<Form.Group controlId="formBasicEmail">
 							<Form.Control type="email" placeholder="Email" name="email" onChange={this.handleChange} className="login" />
