@@ -23,7 +23,7 @@ body {
 
 #nav-dropdown {
 	background-color: #b7b7b7;
-	color: #101010;
+	color: #121212;
 }
 
 /* Text selection (mouse) color. ---------------------------------------------------------------------------------------------------- */
@@ -59,21 +59,21 @@ body {
 
 .customPagination > li > a {
 	color: #2d2d2d;
-  background-color: #101010 !important;
+  background-color: #121212 !important;
 	box-shadow: none !important;
-	border-color: #101010;
+	border-color: #121212;
 }
 .customPagination > li.active > a,
 .customPagination > li > a:hover
 {
 	color: #b7b7b7;
-	border-color: #101010;
+	border-color: #121212;
 }
 
 /* Login form ---------------------------------------------------------------------------------------------------- */
 
 .login, .login:focus {
-	background-color: #101010;
+	background-color: #121212;
 	color: #b7b7b7;
 	box-shadow: none !important;
 	border: none;
@@ -83,7 +83,7 @@ body {
 /* Textarea ---------------------------------------------------------------------------------------------------- */
 
 .textarea, .textarea:focus {
-	background-color: #101010;
+	background-color: #121212;
 	color: #b7b7b7;
 	box-shadow:none !important;
 	border: none;
@@ -92,7 +92,7 @@ body {
 /* Buttons ---------------------------------------------------------------------------------------------------- */
 
 .btn {
-	background-color: #101010 !important;
+	background-color: #121212 !important;
 	color: #b7b7b7 !important;
 	box-shadow:none !important;
 	border: none;
@@ -101,7 +101,7 @@ body {
 /* Feed posts ---------------------------------------------------------------------------------------------------- */
 
 .feed {
-	background-color: #101010;
+	background-color: #121212;
 	color: #b7b7b7;
 	border: none;
 }
@@ -114,13 +114,21 @@ body {
 
 /* Lines ---------------------------------------------------------------------------------------------------- */
 
-.separate-line {
-	border-bottom: thin solid #101010 !important;
-	border-top: thin solid #101010 !important;
+.top-and-bottom-lines {
+	border-bottom: thin solid #121212 !important;
+	border-top: thin solid #121212 !important;
+}
+
+.h-line {
+	border-top: thin solid #121212 !important;
+}
+
+.bottom-line {
+	border-bottom: thin solid #121212 !important;
 }
 
 .vertical-lines {
-  border-left: thin solid #101010;
-	border-right: thin solid #101010;
-	background-color: #101010;
+  border-left: thin solid #121212;
+	border-right: thin solid #121212;
+	/* background-color: #121212; */
 }

@@ -46,18 +46,18 @@ const AuthRoute = ({ component: Component, ...rest }) => (
       checkAuth() ? ( // If authenticated, then show the navigation menu and everything else.
         <div className="container">
           <Container>
-            <div className="vertical-lines">
+            <div className="bottom-line">
               <Navbar>
                 <Navbar.Collapse>
                   <Nav className="mr-auto">
-                    <Nav.Link eventKey="2" href="/home" title="home" className="link"><h4>home</h4></Nav.Link>
-                    <Nav.Link eventKey="3" href="/feed" title="posts" className="link"><h4>posts</h4></Nav.Link>
-                    <Nav.Link eventKey="4" href="/goals" title="goals" className="link"><h4>goals</h4></Nav.Link>
-                    <Nav.Link eventKey="4" href="/hash" title="hash" className="link"><h4>hash</h4></Nav.Link>
-                    <Nav.Link eventKey="4" href="/yt" title="yt" className="link"><h4>yt</h4></Nav.Link>
+                    <Nav.Link eventKey="2" href="/home" title="home" className="link">home</Nav.Link>
+                    <Nav.Link eventKey="3" href="/feed" title="posts" className="link">posts</Nav.Link>
+                    <Nav.Link eventKey="4" href="/goals" title="goals" className="link">goals</Nav.Link>
+                    <Nav.Link eventKey="4" href="/hash" title="hash" className="link">hash</Nav.Link>
+                    <Nav.Link eventKey="4" href="/yt" title="yt" className="link">yt</Nav.Link>
                   </Nav>
                   <Nav className="justify-content-end">
-                    <Nav.Link eventKey="4" href="/" title="out" className="link" onClick={handleSubmit}><h4>out</h4></Nav.Link>
+                    <Nav.Link eventKey="4" href="/" title="out" className="link" onClick={handleSubmit}>out</Nav.Link>
                   </Nav>
                 </Navbar.Collapse>
               </Navbar>
