@@ -154,7 +154,7 @@ class Feed extends React.Component {
 						<form id="feed-form" onSubmit={this.handleSubmit.bind(this)} method="POST" elevation={0}>
 							<Form.Control
 								as="textarea"
-								rows="7"
+								rows="10"
 								name="feed"
 								elevation={0}
 								value={this.state.content}

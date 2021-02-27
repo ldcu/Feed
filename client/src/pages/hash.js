@@ -29,7 +29,7 @@ class Hash extends Component {
 
 				<Form.Control
 					as="textarea"
-					rows="3"
+					rows="5"
 					onChange={this.inputChangedHandler}
 					value={this.state.userInput}
 					className="textarea"
@@ -37,7 +37,7 @@ class Hash extends Component {
 				/>
 
 				{this.state.userInput.length > 0 && (
-					<div align="center">
+					<div className="hash">
 					<br />
 						MD5 - {md5(this.state.userInput).toString()}
 						<br />
