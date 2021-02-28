@@ -16,6 +16,7 @@ require('./models/activity');
 require('./models/quotes');
 require('./models/goals');
 require('./models/users');
+require('./models/links');
 
 // Initiate MongoDB connection.
 
@@ -31,6 +32,7 @@ require('./routes/activity-routes')(app);
 require('./routes/quotes-routes')(app);
 require('./routes/goals-routes')(app);
 require('./routes/users-routes')(app);
+require('./routes/links-routes')(app);
 
 // Choose port & start the server.
 
