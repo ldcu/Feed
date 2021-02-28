@@ -38,9 +38,9 @@ export default class Goals extends React.Component {
 			<>
 			<div className="container">
 			<Helmet>
-				<title>Goals</title>
+				<title>Links</title>
 			</Helmet>
-			<h1>2021</h1>
+			<h1>Saved</h1>
 			<br />
 			<div className="tab-space">
 				<ul>
