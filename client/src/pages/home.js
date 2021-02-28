@@ -2,14 +2,33 @@ import Axios from "axios";
 import React from "react";
 import { Helmet } from "react-helmet";
 
+const processString = require("react-process-string"); // Used for processing the string.
+
+// This is for making the domains (ex.: example.com) clickable. Otherwise you can't click on a link from a text.
+let clickable_link = [
+	{
+		regex: /(http|https):\/\/(\S+)\.([a-z]{2,}?)(.*?)( |,|$|\.|\))/gim, // This is for link starting with 'http' or 'https'.
+		fn: (key, result) => (
+			<span key={key}><a target="_blank" rel="noopener noreferrer" className="link" href={`${result[1]}://${result[2]}.${result[3]}${result[4]}`}>{" "}{result[2]}.{result[3]}{result[4]}</a>{""}{result[5]}</span>
+		),
+	},
+	{
+		regex: /(\S+)\.([a-z]{2,}?)(.*?)( |,|$|\.|\))/gim, // This is for any word that ends in .com or .something, and starts with anything. Meaning it will turn it into a link.
+		fn: (key, result) => (
+			<span key={key}><a target="_blank" rel="noopener noreferrer" className="link" href={`http://${result[1]}.${result[2]}${result[3]}`}>{" "}{result[1]}.{result[2]}{result[3]}</a>{""}{result[4]}</span>
+		),
+	},
+];
+
 export default class Home extends React.Component {
 	state = {
 		quotes: [],
+		links: [],
 		isLoading: true,
 		errors: null,
 	};
 
-	componentDidMount() {
+	getQuotes() {
 		Axios.get("/api/quotes", {
 			headers: {
 				Accept: "application/json",
@@ -26,6 +45,28 @@ export default class Home extends React.Component {
 		.catch((error) => this.setState({ error, isLoading: false }));
 	}
 
+	getLinks() {
+		Axios.get("/api/links", {
+			headers: {
+				Accept: "application/json",
+				"Content-Type": "application/json",
+				Authorization: `Bearer ${localStorage.getItem("access_token")}`,
+			}
+		})
+			.then((response) => {
+				this.setState({
+					links: response.data,
+					isLoading: false,
+				});
+			})
+			.catch((error) => this.setState({ error, isLoading: false }));
+	}
+
+	componentDidMount() {
+		this.getLinks();
+		this.getQuotes();
+	}
+
 	render() {
 		const day = 21,
 			month = "Apr",
@@ -34,7 +75,7 @@ export default class Home extends React.Component {
 		let age = calculateAge(`${month} ${day} ${year}`);
 		let left = timeLeft(`${month} ${day} ${year}`);
 
-		const { isLoading, quotes } = this.state;
+		const { isLoading, quotes, links } = this.state;
 
 		return (
 			<>
@@ -67,6 +108,25 @@ export default class Home extends React.Component {
 			{/* <li className="tab-space">There are {rows} posts made on <a rel="noopener noreferrer" className="link" href="/feed">Feed</a>.</li> */}
 			<div className="tab-space">{age} old.
 			<br/><br/> More {left} and I'll be one hundred years old.</div>
+			<br/>
+			<h1>Saved links</h1>
+			<br />
+			<div className="tab-space">
+				<ul>
+					{!isLoading ? (
+						links.map((fields) => {
+							const { _id, name, link } = fields; // Getting the fields in a const as it is neater and more informative.
+							return (
+								<div key={_id}>
+									<li>{name} {processString(clickable_link)(link)}</li>
+								</div>
+							);
+						})
+					) : (
+						<p>Loading...</p>
+					)}
+				</ul>
+			</div>
 		</div>
 		</>
 		)

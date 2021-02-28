@@ -7,7 +7,6 @@ import Goals from "./pages/goals";
 import Hash from "./pages/hash";
 import Home from "./pages/home";
 import Yt from "./pages/yt";
-import Links from "./pages/links";
 import Login from "./sections/login";
 import NotFound from "./sections/not-found";
 import Top from "./sections/top";
@@ -58,7 +57,6 @@ const AuthRoute = ({ component: Component, ...rest }) => (
                     <Nav.Link eventKey="4" href="/goals" title="goals" className="menu">goals</Nav.Link>
                     <Nav.Link eventKey="4" href="/hash" title="hash" className="menu">hash</Nav.Link>
                     <Nav.Link eventKey="4" href="/yt" title="yt" className="menu">yt</Nav.Link>
-                    <Nav.Link eventKey="4" href="/links" title="links" className="menu">links</Nav.Link>
                   </Nav>
                   <Nav className="justify-content-end">
                     <Nav.Link eventKey="4" href="/" title="out" className="menu" onClick={handleSubmit}>out</Nav.Link>
@@ -88,7 +86,6 @@ export default () => (
       <AuthRoute exact path="/hash" component={Hash} />
       <AuthRoute exact path="/home" component={Home} />
       <AuthRoute exact path="/yt" component={Yt} />
-      <AuthRoute exact path="/links" component={Links} />
       <AuthRoute exact path="/" component={Home} />
       <AuthRoute exact path="*" component={NotFound} />
     </Switch>
