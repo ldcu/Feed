@@ -67,7 +67,7 @@ export default class Goals extends React.Component {
 							const { _id, name, link } = fields; // Getting the fields in a const as it is neater and more informative.
 							return (
 								<div key={_id}>
-									<li>{name} - {processString(clickable_link)(link)}</li>
+									<li>{name} {processString(clickable_link)(link)}</li>
 								</div>
 							);
 						})
