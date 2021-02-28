@@ -58,7 +58,7 @@ export default class Goals extends React.Component {
 			<Helmet>
 				<title>Links</title>
 			</Helmet>
-			<h1>Saved</h1>
+			<h1>Links</h1>
 			<br />
 			<div className="tab-space">
 				<ul>
