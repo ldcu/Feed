@@ -50,10 +50,10 @@ export default class Home extends React.Component {
 						const { _id, quote, author, source } = fields; // Getting the fields in a const as it is neater and more informative.
 						return (
 							<div key={_id}>
-								"{quote}"
-								<br />
-								<br />
-								{author} in {source}
+							<blockquote>
+								<p>"{quote}"</p>
+								<footer>{author} in <cite title="Source Title">{source}</cite></footer>
+							</blockquote>
 							</div>
 						);
 					})

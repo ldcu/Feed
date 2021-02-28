@@ -154,7 +154,7 @@ class Feed extends React.Component {
 						<form id="feed-form" onSubmit={this.handleSubmit.bind(this)} method="POST" elevation={0}>
 							<Form.Control
 								as="textarea"
-								rows="10"
+								rows="5"
 								name="feed"
 								elevation={0}
 								value={this.state.content}
@@ -165,7 +165,7 @@ class Feed extends React.Component {
 							<br />
 
 							<div align="right">
-								<Button type="submit" size="m">Write</Button>
+								<Button type="submit" size="lg">Share</Button>
 							</div>
 							<br />
 						</form>

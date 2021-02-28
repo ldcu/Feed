@@ -10,6 +10,7 @@ import Yt from "./pages/yt";
 import Links from "./pages/links";
 import Login from "./sections/login";
 import NotFound from "./sections/not-found";
+import Top from "./sections/top";
 import Navbar from "react-bootstrap/Navbar";
 
 const checkAuth = () => {
@@ -46,20 +47,21 @@ const AuthRoute = ({ component: Component, ...rest }) => (
     render={(props) =>
       checkAuth() ? ( // If authenticated, then show the navigation menu and everything else.
         <div className="container">
+        <Top/>
           <Container>
-            <div className="bottom-line">
+            <div className="menu-lines">
               <Navbar>
                 <Navbar.Collapse>
                   <Nav className="mr-auto">
-                    <Nav.Link eventKey="2" href="/home" title="home" className="link">home</Nav.Link>
-                    <Nav.Link eventKey="3" href="/feed" title="posts" className="link">posts</Nav.Link>
-                    <Nav.Link eventKey="4" href="/goals" title="goals" className="link">goals</Nav.Link>
-                    <Nav.Link eventKey="4" href="/hash" title="hash" className="link">hash</Nav.Link>
-                    <Nav.Link eventKey="4" href="/yt" title="yt" className="link">yt</Nav.Link>
-                    <Nav.Link eventKey="4" href="/links" title="links" className="link">links</Nav.Link>
+                    <Nav.Link eventKey="2" href="/home" title="home" className="menu">home</Nav.Link>
+                    <Nav.Link eventKey="3" href="/feed" title="posts" className="menu">share</Nav.Link>
+                    <Nav.Link eventKey="4" href="/goals" title="goals" className="menu">goals</Nav.Link>
+                    <Nav.Link eventKey="4" href="/hash" title="hash" className="menu">hash</Nav.Link>
+                    <Nav.Link eventKey="4" href="/yt" title="yt" className="menu">yt</Nav.Link>
+                    <Nav.Link eventKey="4" href="/links" title="links" className="menu">links</Nav.Link>
                   </Nav>
                   <Nav className="justify-content-end">
-                    <Nav.Link eventKey="4" href="/" title="out" className="link" onClick={handleSubmit}>out</Nav.Link>
+                    <Nav.Link eventKey="4" href="/" title="out" className="menu" onClick={handleSubmit}>out</Nav.Link>
                   </Nav>
                 </Navbar.Collapse>
               </Navbar>

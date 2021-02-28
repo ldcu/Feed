@@ -5,7 +5,7 @@ class Bottom extends Component {
 		return (
 			<div>
 			<hr className="h-line"/>
-				<a href="/home" className="link">&#160;&#160;&#160;&#160;← Back to home</a>
+				<a href="/home" className="back-to-home">&#160;&#160;&#160;&#160;← back to home</a>
 			</div>
 		);
 	}
