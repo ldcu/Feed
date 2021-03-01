@@ -5,7 +5,6 @@ import Axios from "axios";
 import { Container } from "react-bootstrap";
 import { Redirect } from "react-router-dom";
 import Alert from "react-bootstrap/Alert";
-import Top from "./top";
 
 class Login extends React.Component {
 
@@ -59,9 +58,6 @@ class Login extends React.Component {
 		return (
 			<div className="container" align="center">
 				<Container>
-				<Top/>
-				<hr className="h-line"/>
-				<br/>
 					<Form onSubmit={this.handleSubmit.bind(this)}>
 						<Form.Group controlId="formBasicEmail">
 							<Form.Control type="email" placeholder="Email" name="email" onChange={this.handleChange} className="login" />
