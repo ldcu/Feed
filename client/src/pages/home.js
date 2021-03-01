@@ -9,13 +9,39 @@ let clickable_link = [
 	{
 		regex: /(http|https):\/\/(\S+)\.([a-z]{2,}?)(.*?)( |,|$|\.|\))/gim, // This is for link starting with 'http' or 'https'.
 		fn: (key, result) => (
-			<span key={key}><a target="_blank" rel="noopener noreferrer" className="link" href={`${result[1]}://${result[2]}.${result[3]}${result[4]}`}>{" "}{result[2]}.{result[3]}{result[4]}</a>{""}{result[5]}</span>
+			<span key={key}>
+				<a
+					target="_blank"
+					rel="noopener noreferrer"
+					className="link"
+					href={`${result[1]}://${result[2]}.${result[3]}${result[4]}`}
+				>
+					{" "}
+					{result[2]}.{result[3]}
+					{result[4]}
+				</a>
+				{""}
+				{result[5]}
+			</span>
 		),
 	},
 	{
 		regex: /(\S+)\.([a-z]{2,}?)(.*?)( |,|$|\.|\))/gim, // This is for any word that ends in .com or .something, and starts with anything. Meaning it will turn it into a link.
 		fn: (key, result) => (
-			<span key={key}><a target="_blank" rel="noopener noreferrer" className="link" href={`http://${result[1]}.${result[2]}${result[3]}`}>{" "}{result[1]}.{result[2]}{result[3]}</a>{""}{result[4]}</span>
+			<span key={key}>
+				<a
+					target="_blank"
+					rel="noopener noreferrer"
+					className="link"
+					href={`http://${result[1]}.${result[2]}${result[3]}`}
+				>
+					{" "}
+					{result[1]}.{result[2]}
+					{result[3]}
+				</a>
+				{""}
+				{result[4]}
+			</span>
 		),
 	},
 ];
@@ -34,15 +60,15 @@ export default class Home extends React.Component {
 				Accept: "application/json",
 				"Content-Type": "application/json",
 				Authorization: `Bearer ${localStorage.getItem("access_token")}`,
-			}
+			},
 		})
-		.then((response) => {
-			this.setState({
-				quotes: response.data,
-				isLoading: false,
-			});
-		})
-		.catch((error) => this.setState({ error, isLoading: false }));
+			.then((response) => {
+				this.setState({
+					quotes: response.data,
+					isLoading: false,
+				});
+			})
+			.catch((error) => this.setState({ error, isLoading: false }));
 	}
 
 	getLinks() {
@@ -51,7 +77,7 @@ export default class Home extends React.Component {
 				Accept: "application/json",
 				"Content-Type": "application/json",
 				Authorization: `Bearer ${localStorage.getItem("access_token")}`,
-			}
+			},
 		})
 			.then((response) => {
 				this.setState({
@@ -79,57 +105,71 @@ export default class Home extends React.Component {
 
 		return (
 			<>
-			<div className="container">
-			<Helmet>
-				<title>Home</title>
-			</Helmet>
-			<h1>Home</h1>
-			<br />
-			<div className="tab-space">
-				{!isLoading ? (
-					quotes.map((fields) => {
-						const { _id, quote, author, source } = fields; // Getting the fields in a const as it is neater and more informative.
-						return (
-							<div key={_id}>
-							<blockquote>
-								<p>"{quote}"</p>
-								<footer>{author} in <cite title="Source Title">{source}</cite></footer>
-							</blockquote>
-							</div>
-						);
-					})
-				) : (
-					<p>Loading...</p>
-				)}
-			</div>
-			<br />
-			<h1>About you</h1>
-			<br />
-			{/* <li className="tab-space">There are {rows} posts made on <a rel="noopener noreferrer" className="link" href="/feed">Feed</a>.</li> */}
-			<div className="tab-space">{age} old.
-			<br/><br/> More {left} and I'll be one hundred years old.</div>
-			<br/>
-			<h1>Saved links</h1>
-			<br />
-			<div className="tab-space">
-				<ul>
-					{!isLoading ? (
-						links.map((fields) => {
-							const { _id, name, link } = fields; // Getting the fields in a const as it is neater and more informative.
-							return (
-								<div key={_id}>
-									<li>{name} {processString(clickable_link)(link)}</li>
-								</div>
-							);
-						})
-					) : (
-						<p>Loading...</p>
-					)}
-				</ul>
-			</div>
-		</div>
-		</>
-		)
+				<div className="container">
+
+					<Helmet>
+						<title>Home</title>
+					</Helmet>
+
+					<h1>Home</h1>
+					<br />
+
+					<div className="tab-space">
+						{!isLoading ? (
+							quotes.map((fields) => {
+								const { _id, quote, author, source } = fields; // Getting the fields in a const as it is neater and more informative.
+								return (
+									<div key={_id}>
+										<blockquote>
+											<p>"{quote}"</p>
+											<footer>
+												{author} in <cite title="Source">{source}</cite>
+											</footer>
+										</blockquote>
+									</div>
+								);
+							})
+						) : (
+							<p>Loading...</p>
+						)}
+					</div>
+
+					<br />
+					<h1>About you</h1>
+					<br />
+
+					<div className="tab-space">
+						{age} old.
+						<br />
+						<br /> More {left} and I'll be one hundred years old.
+					</div>
+					<br />
+
+					<h1>Saved links</h1>
+					<br />
+
+					<div className="tab-space">
+						<ul>
+							{!isLoading ? (
+								links.map((fields) => {
+									const { _id, name, link } = fields; // Getting the fields in a const as it is neater and more informative.
+									return (
+										<div key={_id}>
+											<li>
+												{name} {processString(clickable_link)(link)}
+											</li>
+										</div>
+									);
+								})
+							) : (
+								<p>Loading...</p>
+							)}
+						</ul>
+					</div>
+
+				</div>
+			</>
+		);
 	}
 }
 
