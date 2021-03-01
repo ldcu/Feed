@@ -1,50 +1,9 @@
 import Axios from "axios";
 import React from "react";
 import { Helmet } from "react-helmet";
+import Clickable from "../sections/clickable";
 
 const processString = require("react-process-string"); // Used for processing the string.
-
-// This is for making the domains (ex.: example.com) clickable. Otherwise you can't click on a link from a text.
-let clickable_link = [
-	{
-		regex: /(http|https):\/\/(\S+)\.([a-z]{2,}?)(.*?)( |,|$|\.|\))/gim, // This is for link starting with 'http' or 'https'.
-		fn: (key, result) => (
-			<span key={key}>
-				<a
-					target="_blank"
-					rel="noopener noreferrer"
-					className="link"
-					href={`${result[1]}://${result[2]}.${result[3]}${result[4]}`}
-				>
-					{" "}
-					{result[2]}.{result[3]}
-					{result[4]}
-				</a>
-				{""}
-				{result[5]}
-			</span>
-		),
-	},
-	{
-		regex: /(\S+)\.([a-z]{2,}?)(.*?)( |,|$|\.|\))/gim, // This is for any word that ends in .com or .something, and starts with anything. Meaning it will turn it into a link.
-		fn: (key, result) => (
-			<span key={key}>
-				<a
-					target="_blank"
-					rel="noopener noreferrer"
-					className="link"
-					href={`http://${result[1]}.${result[2]}${result[3]}`}
-				>
-					{" "}
-					{result[1]}.{result[2]}
-					{result[3]}
-				</a>
-				{""}
-				{result[4]}
-			</span>
-		),
-	},
-];
 
 export default class Home extends React.Component {
 	state = {
@@ -156,7 +115,8 @@ export default class Home extends React.Component {
 									return (
 										<div key={_id}>
 											<li>
-												{name} {processString(clickable_link)(link)}
+											{/* Clickable() contains the config for the processString() function */}
+												{name} {processString(Clickable())(link)}
 											</li>
 										</div>
 									);

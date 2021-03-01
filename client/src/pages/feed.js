@@ -7,24 +7,9 @@ import ListGroup from "react-bootstrap/ListGroup";
 import { Pagination } from "react-bootstrap";
 import Alert from "react-bootstrap/Alert";
 import Bottom from "../sections/bottom";
+import Clickable from "../sections/clickable";
 
 const processString = require("react-process-string"); // Used for processing the string.
-
-// This is for making the domains (ex.: example.com) clickable. Otherwise you can't click on a link from a text.
-let clickable_link = [
-	{
-		regex: /(http|https):\/\/(\S+)\.([a-z]{2,}?)(.*?)( |,|$|\.|\))/gim, // This is for link starting with 'http' or 'https'.
-		fn: (key, result) => (
-			<span key={key}><a target="_blank" rel="noopener noreferrer" className="link" href={`${result[1]}://${result[2]}.${result[3]}${result[4]}`}>{" "}{result[2]}.{result[3]}{result[4]}</a>{""}{result[5]}</span>
-		),
-	},
-	{
-		regex: /(\S+)\.([a-z]{2,}?)(.*?)( |,|$|\.|\))/gim, // This is for any word that ends in .com or .something, and starts with anything. Meaning it will turn it into a link.
-		fn: (key, result) => (
-			<span key={key}><a target="_blank" rel="noopener noreferrer" className="link" href={`http://${result[1]}.${result[2]}${result[3]}`}>{" "}{result[1]}.{result[2]}{result[3]}</a>{""}{result[4]}</span>
-		),
-	},
-];
 
 // Building the pagination.
 const BasicPagination = (props) => {
@@ -184,7 +169,8 @@ class Feed extends React.Component {
 								<React.Fragment key={_id}>
 									<ListGroup>
 										<ListGroup.Item className="feed">
-											{processString(clickable_link)(content)}
+										{/* Clickable() contains the config for the processString() function */}
+											{processString(Clickable())(content)}
 											<br />
 											<small className="text-dark align-bottom">{formatDate(date)}</small>
 										</ListGroup.Item>
