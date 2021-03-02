@@ -87,17 +87,27 @@ body {
 	color: #b7b7b7 !important;
 }
 
+.menu:hover {
+	color: #5f5f5f !important;
+	text-decoration: none;
+}
+
 .menu-lines {
 	border-top: thin solid #111111 !important;
 	border-bottom: thin solid #111111 !important;
 }
 
-/* Back home ---------------------------------------------------------------------------------------------------- */
+/* Back home bottom element ---------------------------------------------------------------------------------------------------- */
 
 .back-to-home {
 	color: #b7b7b7 !important;
 	/* font-weight: bold; */
 	text-decoration: none !important;
+}
+
+.back-to-home:hover {
+	color: #5f5f5f !important;
+	text-decoration: none;
 }
 
 /* Textarea ---------------------------------------------------------------------------------------------------- */
