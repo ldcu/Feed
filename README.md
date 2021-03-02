@@ -2,17 +2,17 @@
 A simple fullstack starter application using Node.js, Express.js, React.js and MongoDB.
 
 # Installation
+> Run this command twice. One time in the main directory and then once again in the /client/ directory.
+
 npm install
 
 # Run
-> Open a terminal in the main directory and run.
-
-cd backend
+> Open a terminal in the main directory and run this to get the back-end running.
 
 npm run
 
-> Once that is done, run the following so you can get the front-end up-and-running as well.
+> Then, to start running the front-end as well
 
-cd ..
+cd client
 
 npm run
