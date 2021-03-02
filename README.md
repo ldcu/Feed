@@ -15,7 +15,7 @@ npm install
 npm run
 ```
 
-- Then, to start running the front-end as well
+- Then, a second terminal to start running the front-end as well
 
 ```
 cd client
