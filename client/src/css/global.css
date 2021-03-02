@@ -81,6 +81,22 @@ body {
 	color: #b7b7b7 !important;
 }
 
+/* Menu ---------------------------------------------------------------------------------------------------- */
+
+.menu {
+	color: #b7b7b7 !important;
+}
+
+.menu:hover {
+	color: #5f5f5f !important;
+	text-decoration: none;
+}
+
+.menu-lines {
+	border-top: thin solid #111111 !important;
+	border-bottom: thin solid #111111 !important;
+}
+
 /* Back home bottom element ---------------------------------------------------------------------------------------------------- */
 
 .back-to-home {
@@ -128,58 +144,4 @@ body {
 
 .h-line-bottom {
 	border-bottom: thin solid #111111 !important;
-}
-
-
-/* Menu ---------------------------------------------------------------------------------------------------- */
-
-/* .menu {
-	color: #b7b7b7 !important;
-} */
-
-/* .menu:hover {
-	color: #5f5f5f !important;
-	text-decoration: none;
-} */
-
-/* .menu-lines {
-	border-top: thin solid #111111 !important;
-	border-bottom: thin solid #111111 !important;
-} */
-
-.sidenav {
-  height: 100%;
-  width: 6%;
-  position: fixed;
-  z-index: 1;
-  top: 0;
-  left: 0;
-  background-color: #0e0e0e;
-  overflow-x: hidden;
-  padding-top: 20%;
-}
-
-.flex-column {
-	/* text-align: right; */
-	padding: 6px 80px 6px 3px;
-	/* padding: 55rem; */
-}
-
-.sidenav a {
-  /* padding: 6px 80px 6px 16px; */
-  text-decoration: none;
-	font-weight: bold;
-	/* text-align: center; */
-  font-size: 35px;
-	color: #b7b7b7 !important;
-  display: block;
-}
-
-.sidenav a:hover {
-  color: #5f5f5f !important;
-}
-
-@media screen and (max-height: 450px) {
-  .sidenav {padding-top: 15px;}
-  .sidenav a {font-size: 18px;}
 }

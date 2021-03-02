@@ -48,15 +48,17 @@ const AuthRoute = ({ component: Component, ...rest }) => (
         <div className="container">
         <Top/>
           <Container>
-            <div className="sidenav">
+            <div className="menu-lines">
               <Navbar>
                 <Navbar.Collapse>
-                  <Nav className="flex-column">
+                  <Nav className="mr-auto">
                     <Nav.Link eventKey="2" href="/home" title="home" className="menu">home</Nav.Link>
                     <Nav.Link eventKey="3" href="/feed" title="posts" className="menu">share</Nav.Link>
                     <Nav.Link eventKey="4" href="/goals" title="goals" className="menu">goals</Nav.Link>
                     <Nav.Link eventKey="4" href="/hash" title="hash" className="menu">hash</Nav.Link>
                     <Nav.Link eventKey="4" href="/yt" title="yt" className="menu">yt</Nav.Link>
+                  </Nav>
+                  <Nav className="justify-content-end">
                     <Nav.Link eventKey="4" href="/" title="out" className="menu" onClick={handleSubmit}>out</Nav.Link>
                   </Nav>
                 </Navbar.Collapse>
