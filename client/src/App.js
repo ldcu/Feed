@@ -48,7 +48,7 @@ const AuthRoute = ({ component: Component, ...rest }) => (
         <div className="container">
         <Top/>
           <Container>
-            <div className="menu-lines fixed-top">
+            <div className="fixed-top">
               <Navbar>
                 <Navbar.Collapse>
                   <Nav className="mr-auto">
