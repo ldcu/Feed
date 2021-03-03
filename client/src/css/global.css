@@ -97,6 +97,16 @@ body {
 	border-bottom: thin solid #111111 !important;
 }
 
+.fixed-top {
+	background-color: #0e0e0e;
+	/* opacity: 0.7; */
+}
+
+.fixed-bottom {
+	background-color: #0e0e0e;
+	/* opacity: 0.7; */
+}
+
 /* Back home bottom element ---------------------------------------------------------------------------------------------------- */
 
 .back-to-home {
@@ -137,7 +147,7 @@ body {
 }
 
 .btn:hover {
-	background-color: #111 !important;
+	background-color: #0e0e0e !important;
 	color: #b7b7b7 !important;
 	box-shadow:none !important;
 	border: none;

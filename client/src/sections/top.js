@@ -7,6 +7,7 @@ export default class Top extends Component {
 				<header>
 					<a href="/" className="text-header">llllllll</a>
 				</header>
+			<hr className="h-line-bottom"/>
 			</div>
 		)
 	}
