@@ -136,6 +136,13 @@ body {
 	border: none;
 }
 
+.btn:hover {
+	background-color: #111 !important;
+	color: #b7b7b7 !important;
+	box-shadow:none !important;
+	border: none;
+}
+
 /* Break lines ---------------------------------------------------------------------------------------------------- */
 
 .h-line {
