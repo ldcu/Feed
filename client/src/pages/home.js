@@ -63,73 +63,76 @@ export default class Home extends React.Component {
 		const { isLoading, quotes, links } = this.state;
 
 		return (
-			<>
-				<div className="container">
+      <>
+        <div className="container">
+          <Helmet>
+            <title>Home</title>
+          </Helmet>
 
-					<Helmet>
-						<title>Home</title>
-					</Helmet>
+          <h1>Home</h1>
+          <br />
 
-					<h1>Home</h1>
-					<br />
+          <div className="tab-space">
+            {!isLoading ? (
+              quotes.map((fields) => {
+                const { _id, quote, author, source } = fields; // Getting the fields in a const as it is neater and more informative.
+                return (
+                  <div key={_id}>
+                    <blockquote>
+                      <p>"{quote}"</p>
+                      <footer>
+                        {author} in <cite title="Source">{source}</cite>
+                      </footer>
+                    </blockquote>
+                  </div>
+                );
+              })
+            ) : (
+              <p>Loading...</p>
+            )}
+          </div>
 
-					<div className="tab-space">
-						{!isLoading ? (
-							quotes.map((fields) => {
-								const { _id, quote, author, source } = fields; // Getting the fields in a const as it is neater and more informative.
-								return (
-									<div key={_id}>
-										<blockquote>
-											<p>"{quote}"</p>
-											<footer>
-												{author} in <cite title="Source">{source}</cite>
-											</footer>
-										</blockquote>
-									</div>
-								);
-							})
-						) : (
-							<p>Loading...</p>
-						)}
-					</div>
+          <br />
+          <h1>About you</h1>
+          <br />
 
-					<br />
-					<h1>About you</h1>
-					<br />
+          <div className="tab-space">
+            {age} old.
+            <br />
+            <br /> More {left} and I'll be one hundred years old.
+          </div>
+          <br />
 
-					<div className="tab-space">
-						{age} old.
-						<br />
-						<br /> More {left} and I'll be one hundred years old.
-					</div>
-					<br />
+          <h1>Saved links</h1>
+          <br />
 
-					<h1>Saved links</h1>
-					<br />
-
-					<div className="tab-space">
-						<ul>
-							{!isLoading ? (
-								links.map((fields) => {
-									const { _id, name, link } = fields; // Getting the fields in a const as it is neater and more informative.
-									return (
-										<div key={_id}>
-											<li>
-											{/* Clickable() contains the config for the processString() function */}
-												{name} {processString(Clickable())(link)}
-											</li>
-										</div>
-									);
-								})
-							) : (
-								<p>Loading...</p>
-							)}
-						</ul>
-					</div>
-
-				</div>
-			</>
-		);
+          <div className="tab-space">
+            <ul>
+              {!isLoading ? (
+                links.map((fields) => {
+                  const { _id, name, link } = fields; // Getting the fields in a const as it is neater and more informative.
+                  return (
+                    <div key={_id}>
+                      <li>
+                        {/* Clickable() contains the config for the processString() function */}
+                        {name} {processString(Clickable())(link)}
+                      </li>
+                    </div>
+                  );
+                })
+              ) : (
+                <p>Loading...</p>
+              )}
+            </ul>
+          </div>
+          <div align="left" className="fixed-bottom">
+            <p />
+            <p className="tab-space">'sup</p>
+            <p />
+          </div>
+        </div>
+      </>
+    );
 	}
 }
 

@@ -46,7 +46,7 @@ const AuthRoute = ({ component: Component, ...rest }) => (
     render={(props) =>
       checkAuth() ? ( // If authenticated, then show the navigation menu and everything else.
         <div className="container">
-        <Top/>
+          <Top/>
           <Container>
             <div className="fixed-top">
               <Navbar>

@@ -56,32 +56,63 @@ class Login extends React.Component {
 		}
 
 		return (
-			<div className="container" align="center">
-				<Container>
-					<Form onSubmit={this.handleSubmit.bind(this)}>
-						<Form.Group controlId="formBasicEmail">
-							<Form.Control type="email" placeholder="Email" name="email" onChange={this.handleChange} className="login" />
-						</Form.Group>
+      <div className="container" align="center">
+        <div align="left" className="fixed-top">
+          <p />
+          <p className="tab-space">
+            You have to be logged in to have access to the site.
+          </p>
+          <p />
+        </div>
+        <br />
+        <Container>
+          <Form onSubmit={this.handleSubmit.bind(this)}>
+            <Form.Group controlId="formBasicEmail">
+              <Form.Control
+                type="email"
+                placeholder="Email"
+                name="email"
+                onChange={this.handleChange}
+                className="login"
+              />
+            </Form.Group>
 
-						<Form.Group controlId="formBasicPassword">
-							<Form.Control type="password" placeholder="Password" name="password" onChange={this.handleChange} className="login" />
-						</Form.Group>
-						<Button variant="primary" type="submit">Login</Button>
-					</Form><br/>
+            <Form.Group controlId="formBasicPassword">
+              <Form.Control
+                type="password"
+                placeholder="Password"
+                name="password"
+                onChange={this.handleChange}
+                className="login"
+              />
+            </Form.Group>
+            <Button variant="primary" type="submit">
+              Login
+            </Button>
+          </Form>
+          <br />
 
-						{/* Displaying an alert if wrong credentials. */}
-						{this.state.alert && (
-							<div align="left">
-							<Alert variant="danger" onClose={() => this.setState({ alert: false })} dismissible>
-								<Alert.Heading>Oi, mate! You got an error!</Alert.Heading>
-								<p>Wrong credentials.</p>
-							</Alert>
-							</div>
-						)}
-
-				</Container>
-			</div>
-		);
+          {/* Displaying an alert if wrong credentials. */}
+          {this.state.alert && (
+            <div align="left">
+              <Alert
+                variant="danger"
+                onClose={() => this.setState({ alert: false })}
+                dismissible
+              >
+                <Alert.Heading>Oi, mate! You got an error!</Alert.Heading>
+                <p>Wrong credentials.</p>
+              </Alert>
+            </div>
+          )}
+        </Container>
+        <div align="left" className="fixed-bottom">
+          <p />
+          <p className="tab-space">Log in.</p>
+          <p />
+        </div>
+      </div>
+    );
 	}
 }
 
