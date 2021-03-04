@@ -52,7 +52,7 @@ const AuthRoute = ({ component: Component, ...rest }) => (
               <Navbar>
                 <Navbar.Collapse>
                   <Nav className="mr-auto">
-                    <Nav.Link eventKey="2" href="/home" title="home" className="menu">home</Nav.Link>
+                    <Nav.Link eventKey="2" href="/" title="home" className="menu">home</Nav.Link>
                     <Nav.Link eventKey="3" href="/feed" title="posts" className="menu">share</Nav.Link>
                     <Nav.Link eventKey="4" href="/goals" title="goals" className="menu">goals</Nav.Link>
                     <Nav.Link eventKey="4" href="/hash" title="hash" className="menu">hash</Nav.Link>
