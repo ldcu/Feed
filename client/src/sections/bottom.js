@@ -4,11 +4,11 @@ class Bottom extends Component {
 	render() {
 		return (
       <div class="fixed-bottom">
-        <p></p>
+        <p/>
         <a href="/home" className="back-to-home tab-space">
           ← back to home
         </a>
-        <p></p>
+        <p/>
       </div>
     );
 	}
