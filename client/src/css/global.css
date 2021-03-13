@@ -32,6 +32,22 @@ body {
 	background: #1f1f1f;
 }
 
+/* Scroll bar. ---------------------------------------------------------------------------------------------------- */
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #0c0c0c; 
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #0e0e0e; 
+}
+
 /* Link color. ---------------------------------------------------------------------------------------------------- */
 
 .link {
